@@ -11,15 +11,37 @@
   <!-- Open first row section. -->
   <div class="row">
 
-    <div id="col-1" class="col-xs-12 col-sm-7 col-md-7 col-lg-7">
+    <div id="col-1" class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
 
-      <!-- Quiet rollover. -->
-      <!-- WARNING: There is an HTML/CSS trick in here--the largest -->
-      <!-- item is in "relative" position and the rest are in "absolute". -->
+
       <div class="panel panel-default">
         <div class="panel-heading clearfix">
           <h3 class="panel-title pull-left">Welcome to Monarch</h3>
         </div>
+        <div class="panel-body">
+
+          <div class="">
+            <p>
+              <strong>
+                Monarch enables navigation across a rich landscape of
+                phenotypes, diseases, models, and genes for
+                translational research.
+              </strong>
+            </p>
+            <ul>
+              <li><a href="/page/about#goals">What is Monarch?</a></li>
+              <li><a href="/page/about#background">Can Monarch help me investigate biology of disease?</a></li>
+              <li><a href="/page/about#dataflow">How does Monarch integrate phenotype data?</a></li>
+              <li><a href="/page/about#partners">Who are our partners?</a></li>
+            </ul>
+          </div>
+        </div> <!-- panel-body -->
+
+        <hr/>
+
+      <!-- Quiet rollover. -->
+      <!-- WARNING: There is an HTML/CSS trick in here--the largest -->
+      <!-- item is in "relative" position and the rest are in "absolute". -->
         <div class="panel-body">
           <div id="monarch-carousel" class="monarch-carousel">
             <div class="monarch-carousel-item monarch-carousel-item-selected">
@@ -112,36 +134,108 @@
 
             </div> <!-- monarch-tabber-controls -->
           </div> <!-- monarch-tabber -->
-
-          <hr />
-
-          <div class="">
-            <p>
-              <strong>
-                Monarch enables navigation across a rich landscape of
-                phenotypes, diseases, models, and genes for
-                translational research.
-              </strong>
-            </p>
-            <ul>
-              <li><a href="/page/about#goals">What is Monarch?</a></li>
-              <li><a href="/page/about#background">Can Monarch help me investigate biology of disease?</a></li>
-              <li><a href="/page/about#dataflow">How does Monarch integrate phenotype data?</a></li>
-              <li><a href="/page/about#partners">Who are our partners?</a></li>
-            </ul>
-          </div>
         </div> <!-- panel-body -->
-
       </div> <!-- panel -->
+
+      <!-- Placeholder. -->
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 monarch-home-explore-img">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <img src="/image/carousel-diseases-0.5.jpg" class="monarch-nav-embedded-image" alt="Diseases" />
+              Explore Diseases
+            </div>
+            <div class="panel-body">
+              <a href="/disease/">
+                <img src="/image/explore-graph-dis.png"
+                     class="img-responsive"
+                     alt="Explore Diseases" />
+              </a>
+            </div>
+          </div>
+          <div class="panel panel-default" style="padding-bottom:16px">
+            <div class="panel-heading">
+              <img src="/image/carousel-phenotypes-0.5.jpg" class="monarch-nav-embedded-image" alt="Phenotypes" />
+              Explore Phenotypes
+            </div>
+            <div class="panel-body">
+              <a href="/phenotype/">
+                <img src="/image/explore-graph-phe.png"
+                     class="img-responsive"
+                     alt="Explore Phenotypes" />
+              </a>
+            </div>
+          </div><!-- panel-default -->
+
+        </div> <!-- monarch-home-explore-img -->
+
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 monarch-home-explore-img">
+
+           <div class="panel panel-default">
+            <div class="panel-heading">
+              <img src="/image/carousel-genes-0.5.jpg" class="monarch-nav-embedded-image" alt="Genes" />
+              Explore Genes
+            </div>
+                <div class="panel-body">
+              <a href="/gene/">
+                <img src="/image/explore-graph-gen.png"
+                     class="img-responsive"
+                     alt="Explore Genes" />
+              </a>
+            </div>
+          </div> <!-- panel-default -->
+
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <img src="/image/carousel-models-0.5.jpg" class="monarch-nav-embedded-image" alt="Models" />
+              Explore Models of Disease
+            </div>
+            <div class="panel-body">
+              <a href="/model/">
+                <img src="/image/explore-graph-mod.png"
+                     class="img-responsive"
+                     alt="Explore Models" />
+              </a>
+            </div>
+          </div>
+        </div>  <!-- monarch-home-explore-img -->
+
+      </div> <!-- row -->
+    </div> <!-- column 1 -->
+
+    <!-- Two-column layout, col. 2 -->
+    <div id="col-1" class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+      <!-- Search. -->
+      <div>
+        <div class="panel panel-default"> <!-- style="padding-bottom: 0;"> -->
+          <div class="panel-heading">
+            <h3 class="panel-title">Advanced Phenotype Search</h3>
+          </div>
+          <div class="panel-body">
+            <p class="">
+              Find models and phenotypes similar to a set of abnormal phenotypes of interest and then visualize their overlap.
+            </p>
+            <div class="center-block text-center">
+              <button class="btn btn-primary center-block" href="/analyze/phenotypes">
+                Go to Phenotype Profile Analysis &raquo;
+              </button>
+            </div>
+          </div> <!-- panel-body -->
+        </div> <!-- panel-default -->
+      </div> <!-- -->
+
+
 
       <!-- News and twitter combo. -->
       <div class="row">
-        <div id="blog" class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+        <div id="blog" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
           <div
             class="panel panel-default news-panel"
             style="border-radius:5px;border-color:#e8e8e8;padding-top:12px;">
-            <h4 class="panel-title" style="font-weight:bold;">News and Events</h4>
+            <h4 class="panel-title" style="font-weight:bold;">
+              News and Events
+            </h4>
             <hr  style="margin-top:11px;" />
             {{#blog_results}}
             <dl class="news-list">
@@ -171,7 +265,7 @@
 
 
       <div class="row">
-        <div id="twitter" class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+        <div id="twitter" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
           <a  class="twitter-timeline"
             href="https://twitter.com/search?q=%40MonarchInit+OR+%23raredisease+OR+%40GA4GH+OR+%40phenomecentral"
             data-widget-id="527567015918051328"
@@ -207,89 +301,6 @@
           -->
         </div>
       </div> <!-- row -->
-
-    </div> <!-- column 1 -->
-
-    <!-- Two-column layout, col. 2 -->
-    <div id="col-1" class="col-xs-12 col-sm-5 col-md-5 col-lg-5">
-
-      <!-- Search. -->
-      <div>
-        <div class="panel panel-default"> <!-- style="padding-bottom: 0;"> -->
-          <div class="panel-heading">
-            <h3 class="panel-title">Advanced Phenotype Search</h3>
-          </div>
-          <div class="panel-body">
-            <p class="">
-              Find models and phenotypes similar to a set of abnormal phenotypes of interest and then visualize their overlap.
-            </p>
-            <div class="center-block text-center">
-              <a class="btn btn-primary center-block" href="/analyze/phenotypes">
-                Go to Phenotype Profile Analysis &raquo;
-              </a>
-            </div>
-          </div> <!-- panel-body -->
-        </div> <!-- panel-default -->
-      </div> <!-- -->
-
-      <!-- Placeholder. -->
-      <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 monarch-home-explore-img">
-          <div class="panel panel-default">
-            <div class="panel-heading">
-              Explore Models of Disease
-            </div>
-                  <div class="panel-body">
-              <a href="/model/">
-                <img src="/image/explore-graph-mod.png"
-                     class="img-responsive"
-                     alt="Explore Models" />
-              </a>
-            </div>
-          </div>
-          <div class="panel panel-default">
-              <div class="panel-heading">
-                Explore Diseases
-              </div>
-                  <div class="panel-body">
-                <a href="/disease/">
-                  <img src="/image/explore-graph-dis.png"
-                       class="img-responsive"
-                       alt="Explore Diseases" />
-                </a>
-              </div>
-            </div>
-          </div> <!-- monarch-home-explore-img -->
-
-          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 monarch-home-explore-img">
-            <div class="panel panel-default" style="padding-bottom:16px">
-              <div class="panel-heading">
-                Explore Phenotypes
-              </div>
-              <div class="panel-body">
-                <a href="/phenotype/">
-                  <img src="/image/explore-graph-phe.png"
-                       class="img-responsive"
-                       alt="Explore Phenotypes" />
-                </a>
-              </div>
-            </div><!-- panel-default -->
-
-             <div class="panel panel-default">
-              <div class="panel-heading">
-                Explore Genes
-              </div>
-                  <div class="panel-body">
-                <a href="/gene/">
-                  <img src="/image/explore-graph-gen.png"
-                       class="img-responsive"
-                       alt="Explore Genes" />
-                </a>
-              </div>
-            </div> <!-- panel-default -->
-          </div>  <!-- monarch-home-explore-img -->
-
-        </div> <!-- row -->
     </div> <!-- col-lg-5 -->
   </div> <!-- row -->
 
