@@ -9,7 +9,7 @@ html, body {
 p {
     font-family: Helvetica, Arial, sans-serif;
     font-size: 14px;
-    margin-bottom: 0px;
+    xmargin-bottom: 0px;
 }
 
 p.bigfont {

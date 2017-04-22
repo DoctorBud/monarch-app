@@ -21,6 +21,8 @@ import '../css/monarch.less';
 import '../css/monarch-common.css';
 import '../css/monarch-specific.css';
 import '../css/monarch-home.css';
+import '../css/tour.css';
+import '../css/team.css';
 
 //console.log('before import bbop:', Object.keys(bbop));
 import _bbop from 'bbop';

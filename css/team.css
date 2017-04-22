@@ -1,36 +1,37 @@
 /* Content */
-.title {
+#tour-container .team-container .title {
     font-size: 32px;
     font-weight: 500;
     line-height: 32px;
     padding:10px;
 }
-.team {
+
+#tour-container .team-container .team {
     background-color: #EEE;
     padding-left: 20px;
     padding-right: 20px;
     margin-top: 5px;
     border: #AAA solid 1px;
 }
-.teamname {
+#tour-container .team-container .teamname {
     font-size: 25px;
     font-weight: 700;
     display: inline-block;
     padding-top: 10px;
     height: 60px;
 }
-.teamlogo {
+#tour-container .team-container .teamlogo {
     display: inline-block;
     float: right;
     height: 50px;
 }
-.teamtochead {
+#tour-container .team-container .teamtochead {
     display: inline-block;
     font-size: 25px;
     font-weight: 700;
     padding-top: 10px;
 }
-.teamtoc {
+#tour-container .team-container .teamtoc {
 }
 /* #ucsd { */
 /*     height: 40px; */
@@ -39,32 +40,32 @@
 /* #pitt { */
 /*     padding: 5px 10px; */
 /* } */
-.teammember {
+#tour-container .team-container .teammember {
     border-top: #428bca solid 1px;
     padding: 10px 0px;
 }
-.membername {
+#tour-container .team-container .membername {
     font-weight: 500;
     font-size: 16px;
 }
-.membertitle {
+#tour-container .team-container .membertitle {
     font-style: italic;
     margin-bottom: 5px;
 }
-.memberbio {
+#tour-container .team-container .memberbio {
     line-height: 24px;
     font-weight: 200;
     font-family: Helvetica, Arial, sans-serif;
 }
-.memberhead {
+#tour-container .team-container .memberhead {
     float: left;
 }
-.memberpicture {
+#tour-container .team-container .memberpicture {
     padding-left: 1em;
     max-height: 45px;
     height: auto;
 }
-.contactlogo {
+#tour-container .team-container .contactlogo {
     padding-right: 0.5em;
     max-height: 20px;
     height: auto;    
