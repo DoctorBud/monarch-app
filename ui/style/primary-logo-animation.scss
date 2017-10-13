@@ -7,24 +7,7 @@ span.test-require-ensure {
   -ms-user-select: none;       /* IE/Edge */
   user-select: none;
   font-weight: bold;
-  color: $brand-primary;
-}
-
-@keyframes active-link {
-  from {
-    background-color: white;
-    color: $brand-primary;
-  }
-
-  50% {
-    background-color: $brand-primary;
-    color: white;
-  }
-
-  to {
-    background-color: white;
-    color: $brand-primary;
-  }
+  color: darkslateblue;
 }
 
 span.test-require-ensure.active {
@@ -48,4 +31,26 @@ img.logo.rotate {
   animation-name: rotate-logo;
   animation-iteration-count: infinite;
   animation-timing-function: linear;
+}
+
+.dynamic-import-test {
+  padding-top: 17px;
+  width:70px;
+  height:70px;
+  background: ghostwhite;
+  border:2px solid white;
+  position:absolute;
+  right:1px;
+  bottom:1px;
+  z-index:200;
+}
+
+.dynamic-import-test img.aligncenter {
+  display: block;
+  margin: auto;
+}
+
+.dynamic-import-test img.size-full {
+  height: auto;
+  max-width: 100%;
 }

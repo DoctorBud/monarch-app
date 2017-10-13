@@ -66,7 +66,8 @@ p.bigfont {
  * correct media query section.
  *
  * The default Bootstrap behavior makes the navbar quite different from regular
- * browser width to smaller (e.g. smartphone browsers). */
+ * browser width to smaller (e.g. smartphone browsers).
+ */
 
 
 #monarch-navbar .navbar { z-index: 100; } /* Default of 1000 interferes with popups etc. */
@@ -76,13 +77,6 @@ p.bigfont {
 #monarch-navbar .navbar-nav .dropdown-menu {
   border-radius: 0;
   box-shadow: none;
-}
-
-#monarch-navbar .navbar.monarch-navbar {
-    padding:0;
-    padding-left: 5px;
-    padding-right: 5px;
-    margin:0;
 }
 
 #monarch-navbar .searchspace {
@@ -148,7 +142,7 @@ p.bigfont {
 }
 
 @media (max-width: 840px) {
-    #monarch-navbar.monarch-navbar {
+    #monarch-navbar {
         height:48px !important;
         min-height:48px !important;
     }
@@ -1193,7 +1187,7 @@ em.hilite {
 
 
 /* Component containers
-----------------------------------*/
+----------------------------------
 #monarch-body .ui-widget {
     font-family: Trebuchet MS,Tahoma,Verdana,Arial,sans-serif;
     font-size: 1.1em;
@@ -1228,9 +1222,11 @@ em.hilite {
 #monarch-body .ui-widget-header a {
     color: #ffffff;
 }
+*/
+
 
 /* Interaction states
-----------------------------------*/
+----------------------------------
 #monarch-body .ui-state-default,
 #monarch-body .ui-widget-content .ui-state-default,
 #monarch-body .ui-widget-header .ui-state-default {
@@ -1281,9 +1277,11 @@ em.hilite {
     color: #eb8f00;
     text-decoration: none;
 }
+*/
+
 
 /* Interaction Cues
-----------------------------------*/
+----------------------------------
 #monarch-body .ui-state-highlight,
 #monarch-body .ui-widget-content .ui-state-highlight,
 #monarch-body .ui-widget-header .ui-state-highlight {
@@ -1322,25 +1320,24 @@ em.hilite {
 #monarch-body .ui-widget-content .ui-priority-secondary,
 #monarch-body .ui-widget-header .ui-priority-secondary {
     opacity: .7;
-    filter:Alpha(Opacity=70); /* support: IE8 */
+    filter:Alpha(Opacity=70);
     font-weight: normal;
 }
 #monarch-body .ui-state-disabled,
 #monarch-body .ui-widget-content .ui-state-disabled,
 #monarch-body .ui-widget-header .ui-state-disabled {
     opacity: .35;
-    filter:Alpha(Opacity=35); /* support: IE8 */
+    filter:Alpha(Opacity=35);
     background-image: none;
 }
 #monarch-body .ui-state-disabled .ui-icon {
-    filter:Alpha(Opacity=35); /* support: IE8 - See #6059 */
+    filter:Alpha(Opacity=35);
 }
-
+*/
 
 /* Misc visuals
-----------------------------------*/
+----------------------------------
 
-/* Corner radius */
 #monarch-body .ui-corner-all,
 #monarch-body .ui-corner-top,
 #monarch-body .ui-corner-left,
@@ -1365,21 +1362,34 @@ em.hilite {
 #monarch-body .ui-corner-br {
     border-bottom-right-radius: 4px;
 }
+*/
 
-/* Overlays */
+/* Overlays
 #monarch-body .ui-widget-overlay {
     background: #666666;
     opacity: .5;
-    filter: Alpha(Opacity=50); /* support: IE8 */
+    filter: Alpha(Opacity=50);
 }
 #monarch-body .ui-widget-shadow {
     margin: -5px 0 0 -5px;
     padding: 5px;
     background: #000000;
     opacity: .2;
-    filter: Alpha(Opacity=20); /* support: IE8 */
+    filter: Alpha(Opacity=20);
     border-radius: 5px;
 }
+ */
+
+
+
+
+
+
+
+
+
+
+
 
 .links-page .section {
     padding-top: 0;
@@ -1390,3 +1400,17 @@ em.hilite {
 .links-page .section td {
     padding: 3px 5px;
 }
+
+
+.graph-container,
+.disease-gene-container,
+.disease-pheno-container,
+.pheno-geno-container,
+.gene-disease-container,
+.dove-container
+ {
+    position: relative;
+    border:1px solid lightgray;
+    border-radius: 4px;
+}
+

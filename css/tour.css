@@ -1,74 +1,90 @@
 /* Content */
-.clear {
+.monarch-tour .clear {
     clear: both;
 }
-.title {
+
+.monarch-tour .title {
     font-size: 50px;
     font-weight: 500;
     line-height: 50px;
 }
-.section {
+
+.monarch-tour .section {
     background-color: #EEE;
     border: #AAA solid 1px;
     margin-top: 20px;
     padding: 20px;
 }
-.block {
+
+.monarch-tour .block {
     display: inline-block;
 }
-.block1 {
+
+.monarch-tour .block1 {
     float: right;
     border: #AAA solid 1px;
     margin-top: 10px;
 }
-.block2 {
+
+.monarch-tour .block2 {
     float: left;
     padding-right: 20px;
     width: 725px;
 }
-.sectiontitle {
+
+.monarch-tour .sectiontitle {
     font-size: 25px;
     font-weight: 700;
 }
-.text {
+
+.monarch-tour .text {
     font-weight: 200;
     line-height: 25px;
     margin-top: 10px;
     font-family: Helvetica, Arial, sans-serif;
 }
-h5 {
+
+.monarch-tour h5 {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
-.category {
+
+.monarch-tour .category {
     font-style: italic;
     margin-bottom: -10px;
     font-weight: 400;
 }
-.header {
+
+.monarch-tour .header {
     border-top: #428bca solid 1px;
     margin-top: 20px;
     padding-top: 15px;
     font-size: 18px;
     font-style: italic;
 }
-#purpose {
+
+.monarch-tour #purpose {
     width: 725px;
 }
-#betastats {
+
+.monarch-tour #betastats {
     background-color: white;
     width: 202px;
     padding: 20px;
 }
-#glossary {
+
+.monarch-tour #glossary {
     width: 500px;
 }
-.question {
+
+.monarch-tour .question {
     font-style: italic;
 }
-.answer {
+
+.monarch-tour .answer {
     padding-bottom: 5px;
 }
-pre {
+
+.monarch-tour pre {
     padding: 15px 0px 0px;
     line-height: 1;
     margin-top: 10px;

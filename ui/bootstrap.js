@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 /* This is how you use the environments variables passed by the webpack.DefinePlugin */
 
 import 'jquery';
@@ -35,16 +37,26 @@ if (process.env.DEVTOOLS && process.env.NODE_ENV !== 'production') {
 }
 
 var router = null;
+var progressTimer = null;
+
 function pathLoaded(sourceText, path) {
+  console.log('###pathLoaded', path, sourceText.slice(100, 300));
+  if (progressTimer) {
+    clearTimeout(progressTimer);
+    progressTimer = null;
+  }
+
   var dom = document.getElementById('monarch-content-fragment');
   if (dom) {
     dom.innerHTML = sourceText;
     if (router) {
+      console.log('###router.updatePageLinks');
       router.updatePageLinks();
     }
     var launchablesScript = document.getElementById('monarch-launchables');
     if (launchablesScript) {
       var text = launchablesScript.text;
+      console.log('path launchables', text);
       if (text) {
         if (text.indexOf('/* monarch-launchable-safety-check */') === 0) {
           eval(text);
@@ -60,13 +72,47 @@ function pathLoaded(sourceText, path) {
   }
 }
 
+
+
 function loadPathContent(path) {
+  if (progressTimer) {
+    console.log('leftover progressTimer');
+  }
+  else {
+    var dom = document.getElementById('monarch-content-fragment');
+    dom.innerHTML = '';
+    progressTimer = setTimeout(function() {
+      if (dom && dom.innerHTML === '') {
+        progressTimer = null;
+        dom.innerHTML =
+`<br>
+<br>
+<br>
+<div class="progress">
+  <div
+    class="progress-bar progress-bar-striped active"
+    role="progressbar"
+    aria-valuenow="40"
+    aria-valuemin="0"
+    aria-valuemax="100"
+    style="width:100%;margin:auto;">Loading <b>${path}</b>
+  </div>
+</div>
+`;
+      }
+    }, 500);
+  }
+
   var oReq = new XMLHttpRequest();
   oReq.addEventListener('load', function () {
     pathLoaded(this.responseText, path);
   });
 
-  console.log('loadPathContent', path);
+  console.log('##loadPathContent', path);
+  if (path === '/spa') {
+    path = '/';
+  }
+  path += '?stripme';
   oReq.open('GET', path);
   oReq.send();
 }
@@ -90,49 +136,54 @@ const main = () => {
   // https://github.com/krasimir/navigo
   router
     .on(function () {
-      console.log('router: show home page here');
-      loadPathContent('/home');
+      let path = window.location.pathname;
+      // if (path === '') {
+      //   path = '/home';
+      // }
+      console.log('router: path: ', path);
+      loadPathContent(path);
     })
     .resolve();
 
   router
-    .on('/home', function () {
-      console.log('router: /home');
-      loadPathContent('/home');
-    })
-    .resolve();
-
-  router
-    .on('/disease', function () {
-      console.log('router: /disease');
-      loadPathContent('/disease');
-    })
-    .resolve();
-
-  router
-    .on('/disease/:id', function (params) {
-      console.log('router: /disease/:id', params);
-      loadPathContent(`/disease/${params.id}`);
+    .on('*', function (params, query) {
+      let url = router.lastRouteResolved().url;
+      console.log('router: *:', router, this, params, query, url);
+      if (url === '') {
+        url = '/';
+      }
+      router.pause();
+      router.navigate(url, true);
+      router.resume();
+      loadPathContent(url);
     })
     .resolve();
 
   // router
-  //   .on('/spa', function () {
-  //     console.log('router: /spa');
-  //     loadPathContent('/');
-  //   })
-  //   .resolve();
-  // router
-  //   .on('/spa/disease', function () {
-  //     console.log('router: spa/disease');
-  //     loadPathContent('/disease?spa=1');
+  //   .on('/home', function () {
+  //     console.log('router: /home');
+  //     loadPathContent('/home');
   //   })
   //   .resolve();
 
   // router
-  //   .on('/spa/disease/:id', function (params) {
-  //     console.log('router: /spa/disease/:id', params);
-  //     loadPathContent(`/disease/${params.id}?spa=1`);
+  //   .on('/disease', function () {
+  //     console.log('router: /disease');
+  //     loadPathContent('/disease');
+  //   })
+  //   .resolve();
+
+  // router
+  //   .on('/analyze/:id', function (params) {
+  //     console.log('router: /analyze/:id', params);
+  //     loadPathContent(`/analyze/${params.id}`);
+  //   })
+  //   .resolve();
+
+  // router
+  //   .on('/disease/:id', function (params) {
+  //     console.log('router: /disease/:id', params);
+  //     loadPathContent(`/disease/${params.id}`);
   //   })
   //   .resolve();
 
@@ -145,16 +196,6 @@ const main = () => {
   if (document && document.querySelector) {
     const testRequireEnsureLink = document.querySelector('.test-require-ensure');
     const logo = global.document.querySelector('.logo');
-
-    /** display logos */
-    const cssClasses = ['babel', 'npm', 'eslint', 'sass'];
-    let current = 0;
-    logo.addEventListener('mouseover', () => {
-      const body = document.getElementsByTagName('body')[0];
-      cssClasses.forEach(name => body.classList.remove(name));
-      current = (current + 1) % cssClasses.length;
-      body.classList.add(cssClasses[current]);
-    });
 
     testRequireEnsureLink.addEventListener('click', () => {
       console.log('testRequireEnsureLink');

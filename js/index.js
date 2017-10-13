@@ -7,7 +7,6 @@ global.jQuery = jq;
 
 import '../image/home-splash.png';
 import '../image/partner-do.png';
-// import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
 import 'underscore';
 import 'bootstrap';
@@ -26,6 +25,9 @@ import '../css/monarch.less';
 import '../css/monarch-common.css';
 import '../css/monarch-specific.css';
 import '../css/monarch-home.css';
+import '../css/team.css';
+import '../css/tour.css';
+import '../css/sources.css';
 
 import bbop from 'bbop';
 window.bbop = bbop;
@@ -92,6 +94,9 @@ window.launchBrowser = launchBrowser;
 window.fetchLiteratureOverview = fetchLiteratureOverview;
 window.fetchGeneDescription = fetchGeneDescription;
 
+import {AnalyzeInit} from './Analyze';
+window.AnalyzeInit = AnalyzeInit;
+
 import './stupidtable.min';
 
 import {InitTables} from './tables';
@@ -102,6 +107,13 @@ window.InitTabs = InitTabs;
 
 import FacetFilters from './lib/monarch/widget/facet-filters';
 window.InitFacetFilters = FacetFilters.InitFacetFilters;
+
+import 'phenogrid';
+import '../node_modules/phenogrid/dist/phenogrid-bundle.css';
+// import '../node_modules/phenogrid/css/phenogrid.css';
+
+import {loadPhenogrid} from './phenogridloader-onclick';
+window.loadPhenogrid = loadPhenogrid;
 
 import {
   makeDiseaseLandingGraph,

@@ -323,7 +323,8 @@ const config = {
   resolve: {
     modules: ['node_modules'],
     alias: {
-        'ringo/httpclient': path.join(__dirname, "js/nop.js")
+        'ringo/httpclient': path.join(__dirname, "js/nop.js"),
+        'phenogrid': path.join(__dirname, 'node_modules/phenogrid/js/phenogrid.js')
     }
   }
 };
@@ -332,8 +333,8 @@ if (MODE_DEV_SERVER) {
   config.devServer = {
     host: LOCALHOST ? 'localhost' : myLocalIp(),
     watchContentBase: true,
-    hot: true,
-    hotOnly: true,
+    hot: false,
+    hotOnly: false,
     inline: true,
     contentBase: './',
     historyApiFallback: true,
@@ -348,6 +349,9 @@ if (MODE_DEV_SERVER) {
     },
     '/status': {
       target: 'http://localhost:8080'
+    },
+    '/image': {
+      target: 'http://localhost:8080'
     }
   };
 
@@ -357,10 +361,10 @@ if (MODE_DEV_SERVER) {
     };
   }
   else {
-    config.devServer.proxy['/home'] = {
-      target: 'http://localhost:8080/',
-      pathRewrite: {"^/home" : ""}
-    };
+    // config.devServer.proxy['/home'] = {
+    //   target: 'http://localhost:8080/',
+    //   pathRewrite: {"^/home" : ""}
+    // };
     // config.devServer.proxy['/home'] = {
     //   pathRewrite: function (path, req) {
     //     return '/';
@@ -374,11 +378,17 @@ if (MODE_DEV_SERVER) {
     // };
     config.devServer.proxy['/'] = {
       target: 'http://localhost:8080',
+      pathRewrite: function(path, req) {
+        console.log('pathRewrite', path);
+        return path.replace('?stripme', '');
+      },
       bypass: function(req, res, proxyOptions) {
         const referer = req.headers.referer || '';
-        console.log('bypass3', req.url, referer);
-        if (req.url === '/' && !referer) {
-          console.log(' ... bypassing');
+        console.log('bypass?', req.url, referer);
+        // if (req.url === '/' && referer === '') {
+        if ((referer === '') ||
+            (req.url !== '/' && referer.endsWith(req.url))) {
+          console.log('#... spa.html');
           return '/spa.html';
         }
       }

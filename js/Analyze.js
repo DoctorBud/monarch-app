@@ -848,3 +848,5 @@ function AnalyzeInit(phenogrid_conf, view){
     }
 
 }
+exports.AnalyzeInit = AnalyzeInit;
+

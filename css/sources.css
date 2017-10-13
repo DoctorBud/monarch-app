@@ -1,23 +1,13 @@
-#description {
+.sources-container #description {
     padding-bottom: 5px;
 }
 
-#complete-info {
+.sources-container #complete-info {
     padding: 0px 30px;
 }
-.category {
+.sources-container #complete-info .category {
     display: none;
 }
-.first {
+.sources-container #complete-info .first {
     display: block;
 }
-
-.monarch-container .content .source {
-    height: 50px;
-}
-.inlinesource {
-    display: inline-block;
-    margin-right: 5px;
-    margin-bottom: 5px;
-}
-
