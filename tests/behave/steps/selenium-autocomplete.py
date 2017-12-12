@@ -14,6 +14,9 @@ from selenium.webdriver.support import expected_conditions as EC
 ### Helper functions.
 ###
 
+def ensure_content_loaded(context):
+    element = WebDriverWait(context.browser, 30).until(EC.presence_of_element_located((By.ID, "selenium_id_content")))
+
 def text_to_input(context, elt_id, text):
     #print(context.browser.title)
     webelt = context.browser.find_element_by_id(elt_id)
@@ -106,6 +109,7 @@ def step_impl(context, item):
     #print(context.browser.title)
     webelt = context.browser.find_element_by_partial_link_text(item)
     webelt.click()
+    ensure_content_loaded(context)
 
 @given('I click the autocomplete dropdown item "{item}" with category "{category}"')
 def step_impl(context, item, category):
@@ -117,6 +121,7 @@ def step_impl(context, item, category):
         text = link.get_attribute('text')
         if item in text and category in text:
             link.click()
+            ensure_content_loaded(context)
             break
     pass
 

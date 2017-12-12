@@ -20,7 +20,7 @@
     </div>
  -->
 
-    <div v-if="contentBody" v-html="contentBody" xv-bind="$props">
+    <div id="selenium_id_content" v-if="contentBody" v-html="contentBody" xv-bind="$props">
     </div>
 
   </div>
