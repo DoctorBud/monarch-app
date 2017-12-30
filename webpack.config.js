@@ -333,6 +333,9 @@ if (MODE_DEV_SERVER) {
     // '/image': {
     //   target: 'http://localhost:8080'
     // },
+    '/compare': {
+      target: 'http://localhost:8080'
+    },
     '/autocomplete': {
       target: 'http://localhost:8080'
     },

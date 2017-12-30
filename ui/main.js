@@ -2,13 +2,17 @@
 
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
-import Vue from 'vue'
-import App from './App'
-import Home from '@/components/Home'
-import Navbar from '@/components/Navbar'
-import About from '@/components/About'
-import Router from 'vue-router'
-import MonarchLegacy from '@/components/MonarchLegacy'
+import Vue from 'vue';
+import Router from 'vue-router';
+import TreeView from 'vue-json-tree-view';
+import VueGoodTable from 'vue-good-table';
+
+import App from './App.vue';
+import Home from '@/components/Home.vue';
+import Navbar from '@/components/Navbar.vue';
+import About from '@/components/About.vue';
+import Node from '@/components/Node.vue';
+import MonarchLegacy from '@/components/MonarchLegacy.vue';
 
 
 /**
@@ -89,14 +93,14 @@ window.loadPathContentAsync = loadPathContentAsync;
 const main = () => {
   // console.log('monarch', monarch);
 
-  var root = null;
-
-  Vue.config.productionTip = false
-  Vue.use(Router)
+  Vue.config.productionTip = false;
+  Vue.use(Router);
+  Vue.use(TreeView);
+  Vue.use(VueGoodTable);
 
   Vue.component('my-navbar', Navbar);
 
-  var router = new Router({
+  router = new Router({
     mode: 'history',
     routes: [
       {
@@ -108,6 +112,26 @@ const main = () => {
         path: '/page/aboutSPA',
         name: 'AboutSPA',
         component: About
+      },
+      {
+        path: '/disease/:id',
+        name: 'Node',
+        component: Node
+      },
+      {
+        path: '/phenotype/:id',
+        name: 'Node',
+        component: Node
+      },
+      {
+        path: '/gene/:id',
+        name: 'Node',
+        component: Node
+      },
+      {
+        path: '/model/:id',
+        name: 'Node',
+        component: Node
       },
       {
         path: '/*',

@@ -217,6 +217,12 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
+.navbar-fixed-top {
+background-image: -webkit-linear-gradient(left, #3BDDDB 0%, #047574 100%);
+background-image: linear-gradient(to right, #3BDDDB 0%, #047574 100%);
+background-repeat: repeat-x;
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#ffdfdfdf', GradientType=0);
+}
 </style>
 
 
