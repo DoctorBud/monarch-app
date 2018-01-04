@@ -4,8 +4,9 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue';
 import Router from 'vue-router';
-import TreeView from 'vue-json-tree-view';
 import VueGoodTable from 'vue-good-table';
+import JsonTree from 'vue-json-tree';
+Vue.component('json-tree', JsonTree);
 
 import App from './App.vue';
 import Home from '@/components/Home.vue';
@@ -95,7 +96,6 @@ const main = () => {
 
   Vue.config.productionTip = false;
   Vue.use(Router);
-  Vue.use(TreeView);
   Vue.use(VueGoodTable);
 
   Vue.component('my-navbar', Navbar);
@@ -115,22 +115,22 @@ const main = () => {
       },
       {
         path: '/disease/:id',
-        name: 'Node',
+        name: 'DiseaseNode',
         component: Node
       },
       {
         path: '/phenotype/:id',
-        name: 'Node',
+        name: 'PhenotypeNode',
         component: Node
       },
       {
         path: '/gene/:id',
-        name: 'Node',
+        name: 'GeneNode',
         component: Node
       },
       {
         path: '/model/:id',
-        name: 'Node',
+        name: 'ModelNode',
         component: Node
       },
       {
@@ -143,7 +143,7 @@ const main = () => {
 
 
   router.locationChangeHack = function(url) {
-    console.log('locationChangeHack', )
+    console.log('locationChangeHack loadPathContentAsync', url);
     loadPathContentAsync(url);
   };
 

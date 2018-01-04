@@ -124,6 +124,7 @@ export default {
       // console.log('fetchData', path);
       const scriptHeaderPrefix = '+++++++++++++++monarch-script';
       const scriptHeaderSuffix = '---------------monarch-script';
+      console.log('MonarchLegacy window.loadPathContentAsync', path);
       window.loadPathContentAsync(path, function(content, responseURL) {
         const scriptHeaderBegin = content.indexOf(scriptHeaderPrefix);
         const scriptHeaderEnd = content.indexOf(scriptHeaderSuffix);
@@ -155,8 +156,8 @@ export default {
               if (hashIndex >= 0) {
                 responseURL += path.slice(hashIndex);
               }
-              window.vueRouter.push(responseURL, function() {
-                console.log('pushed', that.$route.path);
+              window.vueRouter.replace(responseURL, function() {
+                console.log('replaced', path, that.$route.path);
                 that.path = that.$route.path;
               });
             }
