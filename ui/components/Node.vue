@@ -1,6 +1,7 @@
 <template>
 <div id="selenium_id_content">
 
+
 <a
   target="_blank"
   v-bind:href="'http://beta.monarchinitiative.org' + path">
@@ -62,7 +63,7 @@
 
     <div class="row node-title">
       <div class="col-xs-12">
-        <span><b>{{node.labels[0]}}</b> ({{node.id}})</span>
+        <span><b>{{nodeLabel}}</b> ({{node.id}})</span>
       </div>
       <div class="col-xs-12">
         <b>AKA:</b>&nbsp;
@@ -73,12 +74,109 @@
 
     <div class="row">
       <div class="col-xs-12">
-        <h5>{{node.definitions[0]}}</h5>
+        <h5>{{nodeDefinition}}</h5>
       </div>
     </div>
 
-    <hr>
+    <br>
+<div class="cards-pf">
 
+<div class="container-fluid container-cards-pf">
+  <div class="row row-cards-pf">
+    <div class="col-xs-6 col-sm-4">
+      <div
+        class="card-pf card-pf-view card-pf-view-select card-pf-view-single-select"
+        v-bind:class="{ active: isSelected.phenotypes }"
+        v-on:click="isSelected.phenotypes = !isSelected.phenotypes">
+        <div class="card-pf-body">
+          <div class="card-pf-top-element">
+              <img class="card-pf-icon-circle" :src="phenotypeIcon"/>
+          </div>
+          <h2 class="card-pf-title text-center">
+            Phenotypes
+          </h2>
+          <div class="card-pf-items text-center">
+            <div class="card-pf-item">
+              <span class="pficon pficon-screen"></span>
+              <span class="card-pf-item-text">{{counts.phenotype}}</span>
+            </div>
+            <div class="card-pf-item">
+              <span class="fa fa-check"></span>
+            </div>
+          </div>
+          <p class="card-pf-info text-center"><strong>Created On</strong> 2015-03-01 02:00 AM
+            <br/> Never Expires</p>
+        </div>
+        <div class="card-pf-view-checkbox">
+          <input type="checkbox">
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-6 col-sm-4">
+      <div
+        class="card-pf card-pf-view card-pf-view-select card-pf-view-single-select"
+        v-bind:class="{ active: isSelected.genes }"
+        v-on:click="isSelected.genes = !isSelected.genes">
+        <div class="card-pf-body">
+          <div class="card-pf-top-element">
+              <img class="card-pf-icon-circle" :src="geneIcon"/>
+          </div>
+          <h2 class="card-pf-title text-center">
+            Genes
+          </h2>
+          <div class="card-pf-items text-center">
+            <div class="card-pf-item">
+              <span class="pficon pficon-screen"></span>
+              <span class="card-pf-item-text">{{counts.gene}}</span>
+            </div>
+            <div class="card-pf-item">
+              <span class="fa fa-check"></span>
+            </div>
+          </div>
+          <p class="card-pf-info text-center"><strong>Created On</strong> 2015-03-01 02:00 AM
+            <br/> Never Expires</p>
+        </div>
+        <div class="card-pf-view-checkbox">
+          <input type="checkbox">
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-6 col-sm-4">
+      <div
+        class="card-pf card-pf-view card-pf-view-select card-pf-view-single-select"
+        v-bind:class="{ active: isSelected.models }"
+        v-on:click="isSelected.models = !isSelected.models">
+        <div class="card-pf-body">
+          <div class="card-pf-top-element">
+              <img class="card-pf-icon-circle" :src="modelIcon"/>
+          </div>
+          <h2 class="card-pf-title text-center">
+            Models
+          </h2>
+          <div class="card-pf-items text-center">
+            <div class="card-pf-item">
+              <span class="pficon pficon-screen"></span>
+              <span class="card-pf-item-text">{{counts.model}}</span>
+            </div>
+            <div class="card-pf-item">
+              <span class="fa fa-check"></span>
+            </div>
+          </div>
+          <p class="card-pf-info text-center"><strong>Created On</strong> 2015-03-01 02:00 AM
+            <br/> Never Expires</p>
+        </div>
+        <div class="card-pf-view-checkbox">
+          <input type="checkbox">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+    <br>
+
+<!--
     <div class="row" v-for="equivalentClass in equivalentClasses">
       <div class="col-xs-8">
         {{equivalentClass.label}}
@@ -89,7 +187,7 @@
     </div>
 
 
-<!--     <div class="row" v-if="node.relationships">
+    <div class="row" v-if="node.relationships">
       <vue-good-table
         class="table table-stripped table-bordered condensed"
         title="Relationships"
@@ -106,7 +204,7 @@
           <td class="has-text-right">{{ props.row.source }}</td>
         </template>
       </vue-good-table>
-    </div> -->
+    </div>
 
 
     <br>
@@ -118,6 +216,7 @@
       </div>
     </div>
 
+-->
   </div>
 </div>
 
@@ -127,6 +226,9 @@
 <script>
 
 import _ from 'underscore';
+// require('patternfly/dist/js/patternfly.min.js');
+// require('patternfly/dist/css/patternfly.min.css');
+// require('patternfly/dist/css/patternfly-additions.min.css');
 
 function pathLoadedAsync(sourceText, responseURL, path, done) {
   if (done) {
@@ -164,7 +266,7 @@ function loadPathContentAsync(path, done) {
 const icons = {
   disease: require('../../image/carousel-diseases.png'),
   gene: require('../../image/carousel-genes.png'),
-  Phenotype: require('../../image/carousel-phenotypes.png'),
+  phenotype: require('../../image/carousel-phenotypes.png'),
   model: require('../../image/carousel-models.png'),
 };
 
@@ -183,6 +285,20 @@ export default {
   },
 
   mounted() {
+    // $(".row-cards-pf > [class*='col'] > .card-pf > .card-pf-body").matchHeight();
+    // Card Single Select
+    var that = this;
+    // that.$nextTick(function() {
+    //   console.log('qsa', document.querySelectorAll('.card-pf-view-single-select'));
+    //   $('.card-pf-view-single-select').click(function() {
+    //     console.log('click');
+    //     if ($(this).hasClass('active'))
+    //     { $(this).removeClass('active'); }
+    //     else
+    //     { $('.card-pf-view-single-select').removeClass('active'); $(this).addClass('active'); }
+    //   });
+    // });
+
     // $('#dismiss, .overlay').on('click', function () {
     //     $('#sidebar').removeClass('active');
     //     $('.overlay').fadeOut();
@@ -214,6 +330,12 @@ export default {
   data () {
     return {
       isActive: false,
+      isSelected: {
+        phenotypes: false,
+        genes: false,
+        models: false,
+        diseases: false,
+      },
       node: null,
       equivalentClasses: null,
       superclasses: null,
@@ -225,10 +347,20 @@ export default {
       progressPath: null,
       path: null,
       nodeID: null,
+      nodeDefinition: null,
+      nodeCategory: null,
       nodeLabel: null,
       nodeIcon: null,
       nodeCategory: null,
-
+      counts: {
+        phenotype: 0,
+        gene: 0,
+        genotype: 0,
+        model: 0,
+        variant: 0,
+        pathway: 0,
+        literature: 0,
+      },
       relationshipsColumns: [
         {
           label: 'Subject',
@@ -293,9 +425,20 @@ export default {
       });
 
       this.synonyms = this.node.synonyms;
-      this.nodeLabel = this.node.labels[0] || '??????';
-      this.nodeCategory = this.node.categories[0];
+      this.nodeDefinition = this.node.definitions ? this.node.definitions[0] : '???definitions???';
+      this.nodeLabel = this.node.labels ? this.node.labels[0] : '???labels???';
+      this.nodeCategory = this.node.categories ? this.node.categories[0].toLowerCase() : '???categories???';
       this.nodeIcon = icons[this.nodeCategory];
+      this.phenotypeIcon = icons.phenotype;
+      this.geneIcon = icons.gene;
+      this.modelIcon = icons.model;
+      this.counts.phenotype = this.node.phenotypeNum;
+      this.counts.gene = this.node.geneNum;
+      this.counts.genotype = this.node.genotypeNum;
+      this.counts.model = this.node.modelNum;
+      this.counts.variant = this.node.variantNum;
+      this.counts.pathway = this.node.pathwayNum;
+      this.literature = this.node.literatureNum;
     },
 
     fetchData() {
@@ -317,7 +460,9 @@ export default {
         }, 500);
       }
       that.node = null;
-      var url = `${that.path}.json`;
+      // var url = `${that.path}.json`;
+      var url = `/node${that.path}.json`;
+      console.log('url', url);
       loadPathContentAsync(url, function(content, responseURL) {
         that.parseNodeContent(content);
         console.log('that.node', that.node);
@@ -338,8 +483,6 @@ export default {
 
 <style lang="scss">
 @import "../../css/_prelude.scss";
-
-
 
 /* ---------------------------------------------------
     SIDEBAR STYLE
@@ -384,16 +527,16 @@ $sidebar-button-width: 32px;
 #sidebar {
   width: $sidebar-width;
   position: fixed;
-  top: ($navbar-height + 60);
+  top: ($navbar-height + 110);
   left: (-$sidebar-width);
   xheight: 80vh;
   min-height: 40px;
   z-index: 50;
-  color: #fff;
+  xcolor: #fff;
   transition: all 0.3s;
   overflow-y: auto;
   overflow-x: hidden;
-  background: darkslateblue;
+  background: ivory;
   padding-left: $sidebar-button-width;
 }
 
@@ -405,6 +548,7 @@ $sidebar-button-width: 32px;
 .sidebar-header {
   position: fixed;
   top: ($navbar-height + 60);
+  height: 100%;
   z-index:999;
 }
 
@@ -420,7 +564,7 @@ $sidebar-button-width: 32px;
 
 #sidebar .sidebar-content .sidebar-title {
   text-align: center;
-  background: black;
+  background: lightgray;
 }
 
 
@@ -528,11 +672,11 @@ $sidebar-button-width: 32px;
 }
 
 
-a[data-toggle="collapse"] {
+#sidebar a[data-toggle="collapse"] {
     position: relative;
 }
 
-a[aria-expanded="false"]::before, a[aria-expanded="true"]::before {
+#sidebar a[aria-expanded="false"]::before, a[aria-expanded="true"]::before {
     content: '\e259';
     display: block;
     position: absolute;
@@ -540,23 +684,23 @@ a[aria-expanded="false"]::before, a[aria-expanded="true"]::before {
     font-family: 'Glyphicons Halflings';
     font-size: 0.6em;
 }
-a[aria-expanded="true"]::before {
+#sidebar a[aria-expanded="true"]::before {
     content: '\e260';
 }
 
 
-ul ul a {
+#sidebar ul ul a {
     font-size: 0.9em !important;
     padding-left: 30px !important;
     background: #6d7fcc;
 }
 
-a.download {
+#sidebar a.download {
     background: #fff;
     color: #7386D5;
 }
 
-a.article, a.article:hover {
+#sidebar a.article, a.article:hover {
     background: #6d7fcc !important;
     color: #fff !important;
 }
@@ -581,7 +725,7 @@ img.node-logo {
 }
 
 .node-container .node-title {
-  background: darkgray;
+  background: #4B4B4B;
   color: white;
 }
 

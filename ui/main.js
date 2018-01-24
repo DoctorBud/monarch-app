@@ -15,7 +15,6 @@ import About from '@/components/About.vue';
 import Node from '@/components/Node.vue';
 import MonarchLegacy from '@/components/MonarchLegacy.vue';
 
-
 /**
  * The linter can be disabled via LINTER=false env var
  *  - show a message in console to inform if it's on or off
@@ -92,7 +91,10 @@ window.loadPathContentAsync = loadPathContentAsync;
 
 
 const main = () => {
-  // console.log('monarch', monarch);
+  console.log('monarch', monarch);
+
+  console.log('monarch', window.$, window.jQuery, window.jquery);
+
 
   Vue.config.productionTip = false;
   Vue.use(Router);

@@ -1,34 +1,50 @@
+// $font-path: "~bootstrap-sass/assets/fonts/" !default;
+// $icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/" !default;
 
-$icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
+$img-path: "~patternfly/dist/img/" !default;
+$font-path: "~patternfly/dist/fonts/" !default;
+$icon-font-path: "~patternfly/dist/fonts/" !default;
 
-$navbar-height: 34px;
 $grid-float-breakpoint: 900px;
+$navbar-height: 34px !default;
+$font-size-base: 16px !default;
 
-@import "themes/monarchclassic/_variables.scss";
-@import "~bootstrap-sass/assets/stylesheets/bootstrap";
-@import "themes/monarchclassic/_bootswatch.scss";
+$fa-font-path:   "~patternfly/dist/fonts/" !default;
+// @import "patternflyhack.scss";
+$fa-font-path:   "~patternfly/dist/fonts/" !default;
+@import "~patternfly/dist/sass/_patternfly.scss";
+@import "~patternfly/dist/css/patternfly-additions.min.css";
 
-// Themes:
-// 		monarchclassic
-//
-// 		cerulean
-// 		cosmo
-// 		cyborg
-// 		darkly
-// 		flatly
-// 		journal
-// 		lumen
-// 		paper
-// 		readable
-// 		sandstone
-// 		simplex
-// 		slate
-// 		solar
-// 		spacelab
-// 		superhero
-// 		united
-// 		yeti
+// With patternfly, some of the Bootstrap navbar vars aren't available,
+// so define them here:
+// $navbar-inverse-color: pink; // #43A395;
+// $navbar-inverse-brand-hover-color: cyan;
+// $navbar-inverse-brand-hover-bg: yellow;
+
+
+// Uncomment this for standard Bootstrap 3.3.7
+// @import "~bootstrap-sass/assets/stylesheets/bootstrap";
 
 
 @import '~jquery-ui/themes/base/all.css';
+
+@import "navbar.scss";
+
+.wrapperforfooter {
+	min-height: 100%;
+	width: 100%;
+    margin: ($navbar-height + 3) 0 2px 0;
+    padding: 0;
+}
+
+.wrapperforfooter .container-fluid.monarch-container {
+	height: 100%;
+	width: 100%;
+	margin: 0;
+    padding: 0;
+}
+
+[v-cloak] {
+display: none;
+}
 

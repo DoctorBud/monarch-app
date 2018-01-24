@@ -13,6 +13,7 @@ import 'jquery-ui';
 import 'jquery-ui/ui/widgets/autocomplete';
 import 'jquery-ui/ui/widgets/draggable';
 import 'bootstrap-sass';
+import 'patternfly/dist/js/patternfly.min.js';
 
 import 'd3';
 

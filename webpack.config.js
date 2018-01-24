@@ -7,6 +7,7 @@
 
 const path = require('path');
 const log = require('npmlog');
+const nodeSass = require("node-sass");
 
 log.level = 'silly';
 const webpack = require('webpack');
@@ -15,6 +16,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const myLocalIp = require('my-local-ip');
 const common = require('./common');
 const AssetsPlugin = require('assets-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const plugins = [];
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
@@ -87,7 +89,7 @@ if (USE_SPA) {
   plugins.push(new HtmlWebpackPlugin({
     title: 'Monarch',
     template: 'ui/index.ejs',
-    filename: 'spa.html',
+    filename: 'index.html',
     inject: MODE_DEV_SERVER, // inject scripts in dev-server mode - in build mode, use the template tags
     MODE_DEV_SERVER: MODE_DEV_SERVER,
     DEVTOOLS: DEVTOOLS,
@@ -115,6 +117,12 @@ plugins.push(new webpack.DefinePlugin({
     USE_SPA: USE_SPA
   }
 }));
+
+plugins.push(new CopyWebpackPlugin([{
+              from: { glob: './node_modules/patternfly/dist/img/*.*'},
+                        to: './img',
+                        flatten: true
+                    }]));
 
 if (OPTIMIZE) {
   plugins.push(new webpack.optimize.UglifyJsPlugin({
@@ -240,16 +248,49 @@ const config = {
       {
         test: /\.scss$/,
         use: extractSass.extract({
-          use: [{
+          use: [
+          {
             loader: 'css-loader',
             query: JSON.stringify({
               sourceMap: true
             })
-          }, {
+          },
+          {
             loader: 'sass-loader',
-            query: JSON.stringify({
-              sourceMap: true
-            })
+            options: {
+              includePaths: [
+                path.join(__dirname, 'node_modules'),
+                path.join(__dirname, 'node_modules/patternfly/dist/sass'),
+                path.join(__dirname, 'node_modules/bootstrap-sass/assets/stylesheets/bootstrap')
+              ],
+              sourceMap: true,
+              importer: [
+                // url will be the string passed to @import
+                // prev is the file where the import was encountered
+                (url, prev) => {
+                  console.log('###importer', url, prev);
+                  if (url.indexOf('bootstrap/') === 0) {
+                    return {
+                      file: path.join(__dirname, 'node_modules/bootstrap-sass/assets/stylesheets/' + url)
+                    };
+                  } else if (url.indexOf('font-awesome') === 0) {
+                    return {
+                      file: path.join(__dirname, 'node_modules/font-awesome/scss/' + url)
+                    };
+                  }
+                  else {
+                    return nodeSass.types.Null();
+                  }
+                  // return (
+                  //   shouldBeAliased(url) ?
+                  //       { file: require.resolve("path/to/alias.sass") } :
+                  //       // pass file to the next importer
+                  //       // the last importer is the webpack importer inserted by the sass-loader
+                  //       nodeSass.types.Null()
+                  // )
+                }
+              ]
+            }
           }],
           // use style-loader in development
           fallback: 'style-loader'
@@ -279,9 +320,11 @@ const config = {
   resolve: {
     modules: ['node_modules'],
     alias: {
-        'vue$': 'vue/dist/vue.min.js',  // 'vue/dist/vue.esm.js',
-        'ringo/httpclient': path.join(__dirname, "js/nop.js"),
-        'phenogrid': path.join(__dirname, 'node_modules/phenogrid/js/phenogrid.js')
+      // 'patternfly$': 'patternfly/dist/sass/patternfly',
+      'bootstrap$': path.join(__dirname, 'node_modules/bootstrap-sass/assets/stylesheets/bootstrap/'),
+      'vue$': 'vue/dist/vue.min.js',  // 'vue/dist/vue.esm.js',
+      'ringo/httpclient': path.join(__dirname, "js/nop.js"),
+      'phenogrid': path.join(__dirname, 'node_modules/phenogrid/js/phenogrid.js')
     }
   }
 };
@@ -378,11 +421,11 @@ if (MODE_DEV_SERVER) {
 
     config.devServer.proxy['/legacy'] = {
       target: 'http://localhost:8080',
-      pathRewrite: function(path, req) {
-        path = path.slice('/legacy'.length);
-        console.log('legacy pathRewrite', path);
-        return path;
-      }
+      // pathRewrite: function(path, req) {
+      //   path = path.slice('/legacy'.length);
+      //   console.log('legacy pathRewrite', path);
+      //   return path;
+      // }
     };
     config.devServer.proxy['/'] = {
       target: 'http://localhost:8080',
@@ -408,21 +451,9 @@ if (MODE_DEV_SERVER) {
       //   }
       // }
       bypass: function(req, res, proxyOptions) {
-        return '/spa.html';
+        return '/index.html';
       }
     };
-
-
-    // config.devServer.proxy['/analyze/phenotypes'] = {
-    //   target: 'http://localhost:8080',
-    //   bypass: function(req, res, proxyOptions) {
-    //     if (req.url === '/analyze/phenotypes') {
-    //    	  console.log('bypass', req.url);
-    //       return '/spa.html';
-    //     }
-    //   }
-    // };
-
   }
 }
 
