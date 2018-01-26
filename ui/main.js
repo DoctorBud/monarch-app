@@ -60,7 +60,7 @@ function loadPathContentAsync(path, done) {
   /* global XMLHttpRequest */
   const oReq = new XMLHttpRequest();
   oReq.addEventListener('load', function load() {
-    console.log('loadPathContentAsync', path, this);
+    // console.log('loadPathContentAsync', path, this);
     pathLoadedAsync(this.responseText, this.responseURL, path, done);
   });
 
@@ -91,11 +91,6 @@ window.loadPathContentAsync = loadPathContentAsync;
 
 
 const main = () => {
-  console.log('monarch', monarch);
-
-  console.log('monarch', window.$, window.jQuery, window.jquery);
-
-
   Vue.config.productionTip = false;
   Vue.use(Router);
   Vue.use(VueGoodTable);
@@ -169,7 +164,6 @@ const main = () => {
       return link.pathname || link.getAttribute('href');
     }
 
-    console.log('updatePageLinks');
     var self = this;
 
     findLinks().forEach(link => {

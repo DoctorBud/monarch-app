@@ -16,7 +16,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const myLocalIp = require('my-local-ip');
 const common = require('./common');
 const AssetsPlugin = require('assets-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const plugins = [];
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
@@ -118,12 +117,6 @@ plugins.push(new webpack.DefinePlugin({
   }
 }));
 
-plugins.push(new CopyWebpackPlugin([{
-              from: { glob: './node_modules/patternfly/dist/img/*.*'},
-                        to: './img',
-                        flatten: true
-                    }]));
-
 if (OPTIMIZE) {
   plugins.push(new webpack.optimize.UglifyJsPlugin({
     compress: {
@@ -224,7 +217,119 @@ const config = {
 
       {
         test: /\.vue$/,
-        loader: 'vue-loader'
+        loader: 'vue-loader',
+
+        options: {
+          esModule: true,
+          loaders: {
+            scss: [ 'vue-style-loader',
+                    'css-loader',
+                    {
+                        loader: 'sass-loader',
+                        options: {
+                            // data: '@import "variables";',
+                            includePaths: [
+                              path.resolve(__dirname, 'node_modules/patternfly/dist/sass'),
+                              path.resolve(__dirname, 'node_modules/bootstrap-sass/assets/stylesheets/bootstrap'),
+                              path.resolve(__dirname, 'node_modules/bootstrap-sass/assets/stylesheets'),
+                              path.resolve(__dirname, 'node_modules/font-awesome/scss'),
+                            ],
+
+                            // importer: [
+                            //   // // url will be the string passed to @import
+                            //   // // prev is the file where the import was encountered
+                            //   (url, prev) => {
+                            //     console.log('###vvvvimporter', url, prev);
+                            //     if (url.indexOf('bootstrap/') === 0) {
+                            //       return {
+                            //         file: path.join(__dirname, 'node_modules/bootstrap-sass/assets/stylesheets/' + url)
+                            //       };
+                            //     }
+                            //     else if (url.indexOf('font-awesome') === 0) {
+                            //       return {
+                            //         file: path.join(__dirname, 'node_modules/font-awesome/scss/' + url)
+                            //       };
+                            //     }
+                            //     else {
+                            //       return nodeSass.types.Null();
+                            //     }
+                            //   }
+                            // ]
+
+                        },
+                    },
+                  ]
+          }
+        },
+
+        // options: {
+        //   loaders: {
+        //     scss: {
+        //       loader: 'sass-loader',
+        //       options: {
+        //         includePaths: [
+        //           path.resolve(__dirname, 'css'),
+        //           path.resolve(__dirname, 'node_modules'),
+        //           path.resolve(__dirname, 'node_modules/patternfly/dist/sass'),
+        //           path.resolve(__dirname, 'node_modules/font-awesome/scss/'),
+        //           path.resolve(__dirname, 'node_modules/bootstrap-sass/assets/stylesheets'),
+        //           path.resolve(__dirname, 'node_modules/bootstrap-sass/assets/stylesheets/bootstrap')
+        //         ]
+        //       }
+        //     }
+        //   }
+        // },
+
+
+        // options: {
+        //   loaders: {
+        //     scss: {
+        //       loader: 'sass-loader',
+        //       options: {
+        //         includePaths: [
+        //           path.resolve(__dirname, 'css'),
+        //           path.resolve(__dirname, 'node_modules'),
+        //           path.resolve(__dirname, 'node_modules/patternfly/dist/sass'),
+        //           path.resolve(__dirname, 'node_modules/font-awesome/scss/'),
+        //           path.resolve(__dirname, 'node_modules/bootstrap-sass/assets/stylesheets'),
+        //           path.resolve(__dirname, 'node_modules/bootstrap-sass/assets/stylesheets/bootstrap')
+        //         ]
+        //       }
+        //     },
+        //     xscss: {
+        //       loader: 'sass-loader',
+        //       options: {
+        //         includePaths: [
+        //           path.resolve(__dirname, 'css'),
+        //           path.resolve(__dirname, 'node_modules'),
+        //           path.resolve(__dirname, 'node_modules/patternfly/dist/sass'),
+        //           path.resolve(__dirname, 'node_modules/bootstrap-sass/assets/stylesheets/bootstrap')
+        //         ],
+        //         sourceMap: true,
+        //         importer: [
+        //           // url will be the string passed to @import
+        //           // prev is the file where the import was encountered
+        //           (url, prev) => {
+        //             console.log('###vimporter', url, prev);
+        //             if (url.indexOf('bootstrap/') === 0) {
+        //               return {
+        //                 file: path.join(__dirname, 'node_modules/bootstrap-sass/assets/stylesheets/' + url)
+        //               };
+        //             }
+        //             else if (url.indexOf('font-awesome') === 0) {
+        //               return {
+        //                 file: path.join(__dirname, 'node_modules/font-awesome/scss/' + url)
+        //               };
+        //             }
+        //             else {
+        //               return nodeSass.types.Null();
+        //             }
+        //           }
+        //         ]
+        //       }
+        //     }
+        //   }
+        // }
       },
 
       {
@@ -259,37 +364,33 @@ const config = {
             loader: 'sass-loader',
             options: {
               includePaths: [
-                path.join(__dirname, 'node_modules'),
+                // path.join(__dirname, 'node_modules'),
                 path.join(__dirname, 'node_modules/patternfly/dist/sass'),
-                path.join(__dirname, 'node_modules/bootstrap-sass/assets/stylesheets/bootstrap')
+                path.resolve(__dirname, 'node_modules/font-awesome/scss'),
+                path.join(__dirname, 'node_modules/bootstrap-sass/assets/stylesheets'),
+                // path.join(__dirname, 'node_modules/bootstrap-sass/assets/stylesheets/bootstrap')
               ],
               sourceMap: true,
-              importer: [
-                // url will be the string passed to @import
-                // prev is the file where the import was encountered
-                (url, prev) => {
-                  console.log('###importer', url, prev);
-                  if (url.indexOf('bootstrap/') === 0) {
-                    return {
-                      file: path.join(__dirname, 'node_modules/bootstrap-sass/assets/stylesheets/' + url)
-                    };
-                  } else if (url.indexOf('font-awesome') === 0) {
-                    return {
-                      file: path.join(__dirname, 'node_modules/font-awesome/scss/' + url)
-                    };
-                  }
-                  else {
-                    return nodeSass.types.Null();
-                  }
-                  // return (
-                  //   shouldBeAliased(url) ?
-                  //       { file: require.resolve("path/to/alias.sass") } :
-                  //       // pass file to the next importer
-                  //       // the last importer is the webpack importer inserted by the sass-loader
-                  //       nodeSass.types.Null()
-                  // )
-                }
-              ]
+              // importer: [
+              //   // // url will be the string passed to @import
+              //   // // prev is the file where the import was encountered
+              //   (url, prev) => {
+              //     // console.log('###importer', url, prev);
+              //     if (url.indexOf('bootstrap/') === 0) {
+              //       return {
+              //         file: path.join(__dirname, 'node_modules/bootstrap-sass/assets/stylesheets/' + url)
+              //       };
+              //     }
+              //     else if (url.indexOf('font-awesome') === 0) {
+              //       return {
+              //         file: path.join(__dirname, 'node_modules/font-awesome/scss/' + url)
+              //       };
+              //     }
+              //     else {
+              //       return nodeSass.types.Null();
+              //     }
+              //   }
+              // ]
             }
           }],
           // use style-loader in development
@@ -301,13 +402,6 @@ const config = {
         loader: 'file-loader'
       },
       { test: /\.(png|jpg|jpeg|gif)$/, loader: 'url-loader?limit=' + ASSETS_LIMIT + '&name=[hash].[ext]' },
-
-      // { test: /\.(png|gif)$/, loader: 'url-loader?limit=' + ASSETS_LIMIT + '&name=[hash].[ext]' },
-      // { test: /\.woff(\?v=\d+\.\d+\.\d+)?$/, loader: 'url-loader?limit=' + ASSETS_LIMIT + '&mimetype=application/font-woff&name=[hash].[ext]' },
-      // { test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/, loader: 'url-loader?limit=' + ASSETS_LIMIT + '&mimetype=application/font-woff&name=[hash].[ext]' },
-      // { test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader: 'url-loader?limit=' + ASSETS_LIMIT + '&mimetype=application/octet-stream&name=[hash].[ext]' },
-      // { test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: 'file-loader?&name=[hash].[ext]' },
-      // { test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: 'url-loader?limit=' + ASSETS_LIMIT + '&mimetype=image/svg+xml&&name=[hash].[ext]' }
     ]
   },
   plugins: plugins,
@@ -367,15 +461,9 @@ if (MODE_DEV_SERVER) {
     '/robots.txt': {
       target: 'http://localhost:8080'
     },
-    // '/resolve': {
-    //   target: 'http://localhost:8080'
-    // },
     '/score': {
       target: 'http://localhost:8080'
     },
-    // '/image': {
-    //   target: 'http://localhost:8080'
-    // },
     '/compare': {
       target: 'http://localhost:8080'
     },
@@ -396,21 +484,6 @@ if (MODE_DEV_SERVER) {
     };
   }
   else {
-    // config.devServer.proxy['/home'] = {
-    //   target: 'http://localhost:8080/',
-    //   pathRewrite: {"^/home" : ""}
-    // };
-    // config.devServer.proxy['/home'] = {
-    //   pathRewrite: function (path, req) {
-    //     return '/';
-    //   }
-    // };
-    // config.devServer.proxy['/home'] = {
-    //   bypass: function(req, res, proxyOptions) {
-    //     console.log('bypass /home', req.url, req.headers.referer);
-    //     return '/';
-    //   }
-    // };
     config.devServer.proxy['/image'] = {
       target: 'http://localhost:8080'
     };
@@ -421,35 +494,9 @@ if (MODE_DEV_SERVER) {
 
     config.devServer.proxy['/legacy'] = {
       target: 'http://localhost:8080',
-      // pathRewrite: function(path, req) {
-      //   path = path.slice('/legacy'.length);
-      //   console.log('legacy pathRewrite', path);
-      //   return path;
-      // }
     };
     config.devServer.proxy['/'] = {
       target: 'http://localhost:8080',
-      // pathRewrite: function(path, req) {
-      //   if (path.endsWith('?stripme')) {
-      //     path = path.replace(/\?stripme$/, '');
-      //     console.log('pathRewrite', path);
-      //   }
-      //   return path;
-      // },
-      // bypass: function(req, res, proxyOptions) {
-      //   const referer = req.headers.referer || '';
-      //   console.log('bypass?', req.url, referer);
-      //   let path = req.url;
-      //   if (path.indexOf('?stripme') >= 0) {
-      //   }
-      //   else if (true || (referer === '') ||
-      //       (path === '/')
-      //        // || (path !== '/' && referer.endsWith(path))
-      //       ) {
-      //     console.log('#... spa.html');
-      //     return '/spa.html';
-      //   }
-      // }
       bypass: function(req, res, proxyOptions) {
         return '/index.html';
       }

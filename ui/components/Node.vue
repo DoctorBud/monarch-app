@@ -482,13 +482,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import "../../css/_prelude.scss";
-
-/* ---------------------------------------------------
-    SIDEBAR STYLE
-https://bootstrapious.com/tutorial/files/sidebar.zip
-https://bootstrapious.com/p/bootstrap-sidebar
------------------------------------------------------ */
+@import "../../css/_prelude-patternfly.scss";
 
 #sidebar a,
 #sidebar a:hover,
@@ -707,9 +701,6 @@ $sidebar-button-width: 32px;
 
 
 
-/* ---------------------------------------------------
-    CONTENT STYLE
------------------------------------------------------ */
 .node-container {
   margin-left: $sidebar-button-width;
   min-height: 100vh;
@@ -728,6 +719,5 @@ img.node-logo {
   background: #4B4B4B;
   color: white;
 }
-
 
 </style>

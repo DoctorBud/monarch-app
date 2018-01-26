@@ -29,6 +29,7 @@ import '../css/monarch-home.css';
 import '../css/team.css';
 import '../css/sources.css';
 import '../css/search_results.css';
+import '../css/annotate.css';
 
 import bbop from 'bbop';
 window.bbop = bbop;

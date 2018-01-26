@@ -124,7 +124,7 @@ export default {
       // console.log('fetchData', path);
       const scriptHeaderPrefix = '+++++++++++++++monarch-script';
       const scriptHeaderSuffix = '---------------monarch-script';
-      console.log('MonarchLegacy window.loadPathContentAsync', path);
+      // console.log('MonarchLegacy window.loadPathContentAsync', path);
       window.loadPathContentAsync(path, function(content, responseURL) {
         const scriptHeaderBegin = content.indexOf(scriptHeaderPrefix);
         const scriptHeaderEnd = content.indexOf(scriptHeaderSuffix);
@@ -149,7 +149,7 @@ export default {
 
             responseURL = responseURL.replace(window.location.origin, '');
             responseURL = responseURL.replace(/\/legacy/g, '');
-            console.log('#responseURL', responseURL, window.location.origin, path);
+            // console.log('#responseURL', responseURL, window.location.origin, path);
             if (responseURL !== path) {
               console.log('path/responseURL', window.location.origin, path, responseURL);
               var hashIndex = path.indexOf('#');
@@ -162,7 +162,7 @@ export default {
               });
             }
 
-            console.log('that.contentScript', that.contentScript.slice(0, 50));
+            // console.log('that.contentScript', that.contentScript.slice(0, 50));
             if (that.contentScript) {
               eval(that.contentScript);
               window.vueRouter.updatePageLinks();

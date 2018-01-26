@@ -6,10 +6,11 @@
 
 #monarch-navbar .monarch-navbar-container .navbar-header {
   height: $navbar-height;
+  border: none;
 }
 
 #monarch-navbar .monarch-navbar-container .navbar-collapse {
-  xheight: $navbar-height;
+  height: $navbar-height;
 }
 
 #monarch-navbar .monarch-navbar-container {
@@ -204,6 +205,15 @@
         width:250px;
         margin:5px 0 5px 15px;
     }
+
+    #monarch-navbar .monarch-navbar-container {
+      height: unset;
+    }
+
+    #monarch-navbar .monarch-navbar-container .navbar-collapse {
+      height: unset;
+    }
+
 
     #monarch-navbar .nav-search-btn {
         margin:5px 0 0 5px;

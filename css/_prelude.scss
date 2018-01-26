@@ -1,30 +1,9 @@
-// $font-path: "~bootstrap-sass/assets/fonts/" !default;
-// $icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/" !default;
+$navbar-height: 36px !default;
 
-$img-path: "~patternfly/dist/img/" !default;
-$font-path: "~patternfly/dist/fonts/" !default;
-$icon-font-path: "~patternfly/dist/fonts/" !default;
+$font-path: "~bootstrap-sass/assets/fonts/" !default;
+$icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/" !default;
 
-$grid-float-breakpoint: 900px;
-$navbar-height: 34px !default;
-$font-size-base: 16px !default;
-
-$fa-font-path:   "~patternfly/dist/fonts/" !default;
-// @import "patternflyhack.scss";
-$fa-font-path:   "~patternfly/dist/fonts/" !default;
-@import "~patternfly/dist/sass/_patternfly.scss";
-@import "~patternfly/dist/css/patternfly-additions.min.css";
-
-// With patternfly, some of the Bootstrap navbar vars aren't available,
-// so define them here:
-// $navbar-inverse-color: pink; // #43A395;
-// $navbar-inverse-brand-hover-color: cyan;
-// $navbar-inverse-brand-hover-bg: yellow;
-
-
-// Uncomment this for standard Bootstrap 3.3.7
-// @import "~bootstrap-sass/assets/stylesheets/bootstrap";
-
+@import "~bootstrap-sass/assets/stylesheets/bootstrap";
 
 @import '~jquery-ui/themes/base/all.css';
 
@@ -47,4 +26,3 @@ $fa-font-path:   "~patternfly/dist/fonts/" !default;
 [v-cloak] {
 display: none;
 }
-
