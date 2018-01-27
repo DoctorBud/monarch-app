@@ -483,6 +483,7 @@ export default {
 
 <style lang="scss">
 @import "../../css/_prelude-patternfly.scss";
+// $navbar-height: 36px;
 
 #sidebar a,
 #sidebar a:hover,
@@ -699,14 +700,11 @@ $sidebar-button-width: 32px;
     color: #fff !important;
 }
 
-
-
 .node-container {
   margin-left: $sidebar-button-width;
   min-height: 100vh;
   transition: all 0.3s;
 }
-
 
 img.node-logo {
   position: absolute;

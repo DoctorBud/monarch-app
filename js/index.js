@@ -12,17 +12,17 @@ import 'underscore';
 import 'jquery-ui';
 import 'jquery-ui/ui/widgets/autocomplete';
 import 'jquery-ui/ui/widgets/draggable';
-import 'bootstrap-sass';
-import 'patternfly/dist/js/patternfly.min.js';
 
 import 'd3';
 
 import {navbar_search_init} from './search_form';
 window.navbar_search_init = navbar_search_init;
 
-import 'font-awesome/css/font-awesome.min.css';
+import 'bootstrap-sass';
+import 'patternfly/dist/js/patternfly.min.js';
+// import 'font-awesome/css/font-awesome.min.css';
 
-import '../css/monarch.scss';
+import 'monarchSCSS';
 import '../css/monarch-common.css';
 import '../css/monarch-specific.css';
 import '../css/monarch-home.css';

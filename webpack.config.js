@@ -233,103 +233,12 @@ const config = {
                               path.resolve(__dirname, 'node_modules/bootstrap-sass/assets/stylesheets/bootstrap'),
                               path.resolve(__dirname, 'node_modules/bootstrap-sass/assets/stylesheets'),
                               path.resolve(__dirname, 'node_modules/font-awesome/scss'),
-                            ],
-
-                            // importer: [
-                            //   // // url will be the string passed to @import
-                            //   // // prev is the file where the import was encountered
-                            //   (url, prev) => {
-                            //     console.log('###vvvvimporter', url, prev);
-                            //     if (url.indexOf('bootstrap/') === 0) {
-                            //       return {
-                            //         file: path.join(__dirname, 'node_modules/bootstrap-sass/assets/stylesheets/' + url)
-                            //       };
-                            //     }
-                            //     else if (url.indexOf('font-awesome') === 0) {
-                            //       return {
-                            //         file: path.join(__dirname, 'node_modules/font-awesome/scss/' + url)
-                            //       };
-                            //     }
-                            //     else {
-                            //       return nodeSass.types.Null();
-                            //     }
-                            //   }
-                            // ]
-
+                            ]
                         },
                     },
                   ]
           }
         },
-
-        // options: {
-        //   loaders: {
-        //     scss: {
-        //       loader: 'sass-loader',
-        //       options: {
-        //         includePaths: [
-        //           path.resolve(__dirname, 'css'),
-        //           path.resolve(__dirname, 'node_modules'),
-        //           path.resolve(__dirname, 'node_modules/patternfly/dist/sass'),
-        //           path.resolve(__dirname, 'node_modules/font-awesome/scss/'),
-        //           path.resolve(__dirname, 'node_modules/bootstrap-sass/assets/stylesheets'),
-        //           path.resolve(__dirname, 'node_modules/bootstrap-sass/assets/stylesheets/bootstrap')
-        //         ]
-        //       }
-        //     }
-        //   }
-        // },
-
-
-        // options: {
-        //   loaders: {
-        //     scss: {
-        //       loader: 'sass-loader',
-        //       options: {
-        //         includePaths: [
-        //           path.resolve(__dirname, 'css'),
-        //           path.resolve(__dirname, 'node_modules'),
-        //           path.resolve(__dirname, 'node_modules/patternfly/dist/sass'),
-        //           path.resolve(__dirname, 'node_modules/font-awesome/scss/'),
-        //           path.resolve(__dirname, 'node_modules/bootstrap-sass/assets/stylesheets'),
-        //           path.resolve(__dirname, 'node_modules/bootstrap-sass/assets/stylesheets/bootstrap')
-        //         ]
-        //       }
-        //     },
-        //     xscss: {
-        //       loader: 'sass-loader',
-        //       options: {
-        //         includePaths: [
-        //           path.resolve(__dirname, 'css'),
-        //           path.resolve(__dirname, 'node_modules'),
-        //           path.resolve(__dirname, 'node_modules/patternfly/dist/sass'),
-        //           path.resolve(__dirname, 'node_modules/bootstrap-sass/assets/stylesheets/bootstrap')
-        //         ],
-        //         sourceMap: true,
-        //         importer: [
-        //           // url will be the string passed to @import
-        //           // prev is the file where the import was encountered
-        //           (url, prev) => {
-        //             console.log('###vimporter', url, prev);
-        //             if (url.indexOf('bootstrap/') === 0) {
-        //               return {
-        //                 file: path.join(__dirname, 'node_modules/bootstrap-sass/assets/stylesheets/' + url)
-        //               };
-        //             }
-        //             else if (url.indexOf('font-awesome') === 0) {
-        //               return {
-        //                 file: path.join(__dirname, 'node_modules/font-awesome/scss/' + url)
-        //               };
-        //             }
-        //             else {
-        //               return nodeSass.types.Null();
-        //             }
-        //           }
-        //         ]
-        //       }
-        //     }
-        //   }
-        // }
       },
 
       {
@@ -414,6 +323,7 @@ const config = {
   resolve: {
     modules: ['node_modules'],
     alias: {
+      'monarchSCSS': (USE_SPA ? '../css/monarch-patternfly.scss' : '../css/monarch.scss'),
       // 'patternfly$': 'patternfly/dist/sass/patternfly',
       'bootstrap$': path.join(__dirname, 'node_modules/bootstrap-sass/assets/stylesheets/bootstrap/'),
       'vue$': 'vue/dist/vue.min.js',  // 'vue/dist/vue.esm.js',
