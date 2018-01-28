@@ -15,7 +15,7 @@
     v-bind:class="{ active: isActive }"
     v-on:click="toggleSidebar()">
   </div>
-  <div class="sidebar-header">
+  <div id="sidebar-header">
     <button
       id="sidebarCollapse"
       v-on:click="toggleSidebar()"
@@ -273,15 +273,15 @@ const icons = {
 export default {
   name: 'home',
   created() {
-    console.log('created', this.nodeID);
+    // console.log('created', this.nodeID);
   },
 
   updated() {
-    console.log('updated', this.nodeID);
+    // console.log('updated', this.nodeID);
   },
 
   destroyed() {
-    console.log('destroyed', this.nodeID);
+    // console.log('destroyed', this.nodeID);
   },
 
   mounted() {
@@ -385,7 +385,6 @@ export default {
 
   methods: {
     toggleSidebar() {
-      console.log('toggleSidebar');
       this.isActive = !this.isActive;
     },
 
@@ -483,7 +482,9 @@ export default {
 
 <style lang="scss">
 @import "../../css/_prelude-patternfly.scss";
-// $navbar-height: 36px;
+
+$sidebar-width: 600px;
+$sidebar-button-width: 32px;
 
 #sidebar a,
 #sidebar a:hover,
@@ -498,26 +499,6 @@ export default {
   padding: 0;
   height: 30px !important;
 }
-
-.wrapper {
-  display: flex;
-  align-items: stretch;
-  min-height: 100%;
-  width: 100%;
-  margin: ($navbar-height + 3) 0 2px 0;
-  padding: 0;
-}
-
-.wrapper .container-fluid.monarch-container {
-  height: 100%;
-  width: 100%;
-  margin: 0;
-  padding: 0;
-}
-
-
-$sidebar-width: 600px;
-$sidebar-button-width: 32px;
 
 #sidebar {
   width: $sidebar-width;
@@ -540,14 +521,14 @@ $sidebar-button-width: 32px;
   box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
 }
 
-.sidebar-header {
+#sidebar-header {
   position: fixed;
-  top: ($navbar-height + 60);
+  top: ($navbar-height + 110);
   height: 100%;
   z-index:999;
 }
 
-.sidebar-header #sidebarCollapse {
+#sidebar-header #sidebarCollapse {
   padding: 0 4px;
 }
 
@@ -578,26 +559,6 @@ $sidebar-button-width: 32px;
 
 #sidebar .sidebar-content .subclass {
   margin-left: 30px;
-}
-
-
-#dismiss {
-    width: 35px;
-    height: 35px;
-    line-height: 35px;
-    text-align: center;
-    background: #7386D5;
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    cursor: pointer;
-    -webkit-transition: all 0.3s;
-    -o-transition: all 0.3s;
-    transition: all 0.3s;
-}
-#dismiss:hover {
-    background: #fff;
-    color: #7386D5;
 }
 
 .overlay {
@@ -634,7 +595,8 @@ $sidebar-button-width: 32px;
     padding: 10px !important;
 }
 
-#sidebar.active a[aria-expanded="false"]::before, #sidebar.active a[aria-expanded="true"]::before {
+#sidebar.active a[aria-expanded="false"]::before,
+#sidebar.active a[aria-expanded="true"]::before {
     top: auto;
     bottom: 5px;
     right: 50%;
@@ -661,7 +623,8 @@ $sidebar-button-width: 32px;
     margin-right: 10px;
 }
 
-#sidebar ul li.active > a, a[aria-expanded="true"] {
+#sidebar ul li.active > a,
+#sidbar a[aria-expanded="true"] {
     color: #fff;
     background: #6d7fcc;
 }
@@ -671,7 +634,8 @@ $sidebar-button-width: 32px;
     position: relative;
 }
 
-#sidebar a[aria-expanded="false"]::before, a[aria-expanded="true"]::before {
+#sidebar a[aria-expanded="false"]::before,
+#sidebar a[aria-expanded="true"]::before {
     content: '\e259';
     display: block;
     position: absolute;
@@ -695,7 +659,8 @@ $sidebar-button-width: 32px;
     color: #7386D5;
 }
 
-#sidebar a.article, a.article:hover {
+#sidebar a.article,
+#sidebar a.article:hover {
     background: #6d7fcc !important;
     color: #fff !important;
 }
@@ -716,6 +681,15 @@ img.node-logo {
 .node-container .node-title {
   background: #4B4B4B;
   color: white;
+}
+
+.wrapper {
+  display: flex;
+  align-items: stretch;
+  min-height: 100%;
+  width: 100%;
+  margin: ($navbar-height + 1) 0 2px 0;
+  padding: 0;
 }
 
 </style>

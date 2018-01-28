@@ -84,7 +84,7 @@ export default {
       // hash changes are currently handled by monarch-tabs.js
       // within the loaded MonarchLegacy component.
 
-      console.log('$route', to, from, to.path, this.path);
+      // console.log('$route', to, from, to.path, this.path);
       if (to.path !== this.path) {
         this.fetchData();
       }

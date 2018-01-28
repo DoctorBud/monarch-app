@@ -4,14 +4,6 @@
   <div id="monarch-home-container" class="container-fluid monarch-container">
     <div class="row">
       <div class="col-xs-12">
-        <router-link to="/disease/MONDO:0007947">
-          Disease: Marfan Syndrome
-        </router-link>
-      </div>
-    </div>
-    <div class="row">
-      <br>
-      <div class="col-xs-12">
 
         <form id="home_search_form" class="searchspace"
             action="/search" role="search">
