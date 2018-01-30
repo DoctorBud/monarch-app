@@ -1,7 +1,6 @@
 <template>
 <div id="selenium_id_content">
 
-
 <a
   target="_blank"
   v-bind:href="'http://beta.monarchinitiative.org' + path">
@@ -9,6 +8,10 @@
 </a>
 
 
+<!-- <pre>
+{{JSON.stringify(node, null, 2)}}
+</pre>
+ -->
 <div class="wrapper">
   <div
     class="overlay"
@@ -81,96 +84,43 @@
     <br>
 <div class="cards-pf">
 
+
 <div class="container-fluid container-cards-pf">
   <div class="row row-cards-pf">
-    <div class="col-xs-6 col-sm-4">
-      <div
-        class="card-pf card-pf-view card-pf-view-select card-pf-view-single-select"
-        v-bind:class="{ active: isSelected.phenotypes }"
-        v-on:click="isSelected.phenotypes = !isSelected.phenotypes">
-        <div class="card-pf-body">
-          <div class="card-pf-top-element">
-              <img class="card-pf-icon-circle" :src="phenotypeIcon"/>
-          </div>
-          <h2 class="card-pf-title text-center">
-            Phenotypes
-          </h2>
-          <div class="card-pf-items text-center">
-            <div class="card-pf-item">
-              <span class="pficon pficon-screen"></span>
-              <span class="card-pf-item-text">{{counts.phenotype}}</span>
-            </div>
-            <div class="card-pf-item">
-              <span class="fa fa-check"></span>
-            </div>
-          </div>
-          <p class="card-pf-info text-center"><strong>Created On</strong> 2015-03-01 02:00 AM
-            <br/> Never Expires</p>
-        </div>
-        <div class="card-pf-view-checkbox">
-          <input type="checkbox">
-        </div>
-      </div>
-    </div>
-    <div class="col-xs-6 col-sm-4">
-      <div
-        class="card-pf card-pf-view card-pf-view-select card-pf-view-single-select"
-        v-bind:class="{ active: isSelected.genes }"
-        v-on:click="isSelected.genes = !isSelected.genes">
-        <div class="card-pf-body">
-          <div class="card-pf-top-element">
-              <img class="card-pf-icon-circle" :src="geneIcon"/>
-          </div>
-          <h2 class="card-pf-title text-center">
-            Genes
-          </h2>
-          <div class="card-pf-items text-center">
-            <div class="card-pf-item">
-              <span class="pficon pficon-screen"></span>
-              <span class="card-pf-item-text">{{counts.gene}}</span>
-            </div>
-            <div class="card-pf-item">
-              <span class="fa fa-check"></span>
-            </div>
-          </div>
-          <p class="card-pf-info text-center"><strong>Created On</strong> 2015-03-01 02:00 AM
-            <br/> Never Expires</p>
-        </div>
-        <div class="card-pf-view-checkbox">
-          <input type="checkbox">
-        </div>
-      </div>
-    </div>
-    <div class="col-xs-6 col-sm-4">
-      <div
-        class="card-pf card-pf-view card-pf-view-select card-pf-view-single-select"
-        v-bind:class="{ active: isSelected.models }"
-        v-on:click="isSelected.models = !isSelected.models">
-        <div class="card-pf-body">
-          <div class="card-pf-top-element">
-              <img class="card-pf-icon-circle" :src="modelIcon"/>
-          </div>
-          <h2 class="card-pf-title text-center">
-            Models
-          </h2>
-          <div class="card-pf-items text-center">
-            <div class="card-pf-item">
-              <span class="pficon pficon-screen"></span>
-              <span class="card-pf-item-text">{{counts.model}}</span>
-            </div>
-            <div class="card-pf-item">
-              <span class="fa fa-check"></span>
-            </div>
-          </div>
-          <p class="card-pf-info text-center"><strong>Created On</strong> 2015-03-01 02:00 AM
-            <br/> Never Expires</p>
-        </div>
-        <div class="card-pf-view-checkbox">
-          <input type="checkbox">
-        </div>
-      </div>
-    </div>
+
+    <node-card
+      class="col-xs-12 col-sm-4"
+      card-type="phenotype"
+      :card-count="counts.phenotype"
+      :parent-node="node"
+      :parent-node-id="nodeID"
+      v-on:expandCard="expandCard">
+      <h4>I'm in a Phenotype for {{nodeID}}</h4>
+    </node-card>
+
+    <node-card
+      class="col-xs-12 col-sm-4"
+      card-type="gene"
+      :card-count="counts.gene"
+      :parent-node="node"
+      :parent-node-id="nodeID"
+      v-on:expandCard="expandCard">
+      <h4>I'm in a Gene for {{nodeID}}</h4>
+    </node-card>
+
+    <node-card
+      class="col-xs-12 col-sm-4"
+      card-type="model"
+      :card-count="counts.model"
+      :parent-node="node"
+      :parent-node-id="nodeID"
+      v-on:expandCard="expandCard">
+      <h4>I'm in a Model for {{nodeID}}</h4>
+    </node-card>
+
   </div>
+</div>
+
 </div>
 
 </div>
@@ -226,9 +176,6 @@
 <script>
 
 import _ from 'underscore';
-// require('patternfly/dist/js/patternfly.min.js');
-// require('patternfly/dist/css/patternfly.min.css');
-// require('patternfly/dist/css/patternfly-additions.min.css');
 
 function pathLoadedAsync(sourceText, responseURL, path, done) {
   if (done) {
@@ -384,6 +331,10 @@ export default {
 
 
   methods: {
+    expandCard(arg) {
+      console.log('expandCard', arg);
+    },
+
     toggleSidebar() {
       this.isActive = !this.isActive;
     },
@@ -445,7 +396,7 @@ export default {
       const path = that.$route.fullPath;
       this.path = that.$route.path;
       this.nodeID = this.$route.params.id;
-      console.log('fetchData', path);
+      console.log('fetchData', path, this.$route.params, this.$route.params.id);
 
       if (that.progressTimer) {
         console.log('leftover progressTimer');

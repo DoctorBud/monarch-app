@@ -13,6 +13,7 @@ import Home from '@/components/Home.vue';
 import Navbar from '@/components/Navbar.vue';
 import About from '@/components/About.vue';
 import Node from '@/components/Node.vue';
+import NodeCard from '@/components/NodeCard.vue';
 import MonarchLegacy from '@/components/MonarchLegacy.vue';
 
 /**
@@ -95,7 +96,8 @@ const main = () => {
   Vue.use(Router);
   Vue.use(VueGoodTable);
 
-  Vue.component('my-navbar', Navbar);
+  Vue.component('monarch-navbar', Navbar);
+  Vue.component('node-card', NodeCard);
 
   router = new Router({
     mode: 'history',
