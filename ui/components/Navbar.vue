@@ -76,6 +76,32 @@
             </ul>
         </li>
 
+
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              Debug
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li>
+                <router-link to="/disease/MONDO:0007947">
+                  Marfan syndrome MONDO:0007947
+                </router-link>
+              </li>
+              <li>
+                <router-link to="/disease/OMIA:000628-9913">
+                  Marfan syndrome OMIA:000628-9913
+                </router-link>
+              </li>
+            </ul>
+        </li>
+
+
+
+
+
+
+
         <form
           v-on:submit="searchSubmit"
           id="search_form"

@@ -102,8 +102,16 @@
 
     <div
       v-if="!expandedCard"
-      class="description-bar">
-      {{nodeDefinition}}
+      class="row row-cards-pf">
+      <div class="col-xs-12">
+        <div class="card-pf" style="overflow-y:auto;">
+          <div class="card-pf-body">
+            <div class="description-bar">
+              {{nodeDefinition}}
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div
