@@ -50,6 +50,27 @@
               <span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
+                <li>
+                  <router-link to="/disease/MONDO:0007947">
+                    Marfan syndrome MONDO:0007947
+                  </router-link>
+                </li>
+                <li>
+                  <router-link to="/disease/OMIA:000628-9913">
+                    Marfan syndrome OMIA:000628-9913
+                  </router-link>
+                </li>
+                <li>
+                  <router-link to="/gene/MGI:3A98365">
+                    Sox3 (Mus musculus) MGI:3A98365
+                  </router-link>
+                </li>
+                <li>
+                  <router-link to="/gene/ZFIN:ZDB-GENE-980526-333">
+                    sox3 (Danio rerio) ZFIN:ZDB-GENE-980526-333
+                  </router-link>
+                </li>
+
                 <li><router-link to="/page/aboutSPA">About Monarch (SPA)</router-link></li>
                 <li><router-link to="/page/about">About Monarch</router-link></li>
                 <li><router-link to="/about/sources">Data Sources</router-link></li>
@@ -76,33 +97,8 @@
             </ul>
         </li>
 
-
-        <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              Debug
-              <span class="caret"></span>
-            </a>
-            <ul class="dropdown-menu">
-              <li>
-                <router-link to="/disease/MONDO:0007947">
-                  Marfan syndrome MONDO:0007947
-                </router-link>
-              </li>
-              <li>
-                <router-link to="/disease/OMIA:000628-9913">
-                  Marfan syndrome OMIA:000628-9913
-                </router-link>
-              </li>
-            </ul>
-        </li>
-
-
-
-
-
-
-
         <form
+          v-if="$route.path !== '/'"
           v-on:submit="searchSubmit"
           id="search_form"
           class="navbar-right navbar-form navbar_searchspace"
@@ -141,8 +137,8 @@ export default {
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style>
+<style lang="scss">
+@import "../../css/_prelude-patternfly.scss";
 
 nav#monarch-navbar.navbar.navbar-default.navbar-pf .navbar-brand {
   height: $navbar-height;
@@ -173,14 +169,14 @@ nav#monarch-navbar.navbar.navbar-default.navbar-pf .navbar-toggle .icon-bar {
 }
 
 #monarch-navbar {
-  background-image: -webkit-linear-gradient(left, #0B556B 0%, #232733 100%);
-  background-image: linear-gradient(to right, #0B556B 0%, #232733 100%);
-  background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#ffdfdfdf', GradientType=0);
+  background-image: -webkit-linear-gradient(left, #0B556B 0%, #232733 100%) !important;
+  background-image: linear-gradient(to right, #0B556B 0%, #232733 100%) !important;
+  background-repeat: repeat-x !important;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#ffdfdfdf', GradientType=0) !important;
 }
 
 #search_form {
-  margin: -3px 30px 0 10px;
+  margin: 1px 32px 0 10px;
   padding: 0;
 }
 
@@ -191,10 +187,15 @@ nav#monarch-navbar.navbar.navbar-default.navbar-pf .navbar-toggle .icon-bar {
 
 #navbar-search-btn {
   font-weight:500;
-  width:40px;
-  height: 30px;
+  width:34px;
+  height: 27px;
   margin:0;
 }
 
+@media (max-width: ($grid-float-breakpoint + 60)) {
+  .branding-name {
+    display: none;
+  }
+}
 
 </style>

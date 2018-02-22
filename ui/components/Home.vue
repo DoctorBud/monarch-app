@@ -4,32 +4,56 @@
     id="monarch-home-container"
     class="container-fluid monarch-container">
 
-
   <header class="intro">
     <div class="intro-body">
       <div class="container">
         <div class="row">
           <div class="col-md-8 col-md-offset-2">
-          <br>
+
+<!--             <a href="#home_search_anchor" class="btn btn-circle page-scroll">
+              <i class="fa fa-angle-double-down animated"></i>
+            </a>
+ -->
+
             <h1 class="brand-heading">
               <img
                 class="center-block text-center img-responsive"
-                style="max-height:200px;"
+                style="max-height:150px;"
                 src="../assets/images/monarch-logo-white-stacked.png"/>
             </h1>
+
+      <div class="row">
+        <div class="col-xs-12">
+
+          <form
+            id="home_search_form"
+            class="searchspace"
+            action="/search"
+            role="search">
+            <div class="input-group">
+              <span class="input-group-addon" id="sizing-addon1">
+              <i class="fa fa-search fa-fw"></i>
+              </span>
+              <input
+                autofocus
+                id="home_search" type="text" class="form-control" placeholder="Search for...">
+              <span class="input-group-btn">
+              <button class="btn btn-default" type="button">Search</button>
+              </span>
+            </div>
+          </form>
+
+        </div>
+      </div>
+
             <p class="intro-text">
               Advancing translational science by semantically integrating biological information across species.
             </p>
-            <a href="#search" class="btn btn-circle page-scroll">
-              <i class="fa fa-angle-double-down animated"></i>
-            </a>
           </div>
         </div>
       </div>
     </div>
   </header>
-
-
 
   <section
     id="search"
@@ -48,7 +72,9 @@
               <span class="input-group-addon" id="sizing-addon1">
               <i class="fa fa-search fa-fw"></i>
               </span>
-              <input id="home_search" type="text" class="form-control" placeholder="Search for...">
+              <input
+                autofocus
+                id="home_search" type="text" class="form-control" placeholder="Search for...">
               <span class="input-group-btn">
               <button class="btn btn-default" type="button">Search</button>
               </span>
