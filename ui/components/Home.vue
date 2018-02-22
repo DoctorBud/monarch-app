@@ -37,9 +37,12 @@
               <input
                 autofocus
                 id="home_search" type="text" class="form-control" placeholder="Search for...">
-              <span class="input-group-btn">
+
+<!--               <span class="input-group-btn">
               <button class="btn btn-default" type="button">Search</button>
               </span>
+ -->
+
             </div>
           </form>
 
@@ -55,6 +58,7 @@
     </div>
   </header>
 
+<!-- 
   <section
     id="search"
     class="container search-section text-center">
@@ -75,9 +79,12 @@
               <input
                 autofocus
                 id="home_search" type="text" class="form-control" placeholder="Search for...">
+
               <span class="input-group-btn">
               <button class="btn btn-default" type="button">Search</button>
               </span>
+
+
             </div>
           </form>
 
@@ -86,7 +93,7 @@
 
     </div>
   </section>
-
+ -->
 
 
   <section id="about" class="container content-section text-center">

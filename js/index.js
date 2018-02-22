@@ -25,7 +25,7 @@ import 'patternfly/dist/js/patternfly.min.js';
 import 'monarchSCSS';
 import '../css/monarch-common.css';
 import '../css/monarch-specific.css';
-// import '../css/monarch-home.css';
+import '../css/monarch-home.css';
 import '../css/team.css';
 import '../css/sources.css';
 import '../css/search_results.css';

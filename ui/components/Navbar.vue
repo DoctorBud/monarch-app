@@ -13,10 +13,12 @@
 
     <router-link to="/" class="navbar-brand">
       <img class="branding-logo"
-           src="/image/logo.png"
+           src="../assets/images/monarch-logo-white.png"
            alt="Monarch Initiative logo"
            title="Monarch Initiative front page"/>
-      <span class="branding-name">Monarch</span>
+
+      <!-- <span class="branding-name">Monarch</span> -->
+
     </router-link>
   </div>
   <div id="navbar" class="navbar-collapse collapse">
@@ -50,6 +52,16 @@
               <span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
+                <li><router-link to="/page/about">About Monarch</router-link></li>
+                <li><router-link to="/about/sources">Data Sources</router-link></li>
+                <li><router-link to="/page/releases">Releases</router-link></li>
+                <li><router-link to="/page/team">Monarch Team</router-link></li>
+                <li><router-link to="/page/disclaimer">Monarch Disclaimer</router-link></li>
+                <li role="separator" class="divider"></li>
+                <li><router-link to="/page/services">Monarch Web Services and APIs</router-link></li>
+                <li><a target="_blank" href="https://archive.monarchinitiative.org/latest ">Data Downloads</a></li>
+                <li role="separator" class="divider"></li>
+
                 <li>
                   <router-link to="/disease/MONDO:0007947">
                     Marfan syndrome MONDO:0007947
@@ -72,14 +84,6 @@
                 </li>
 
                 <li><router-link to="/page/aboutSPA">About Monarch (SPA)</router-link></li>
-                <li><router-link to="/page/about">About Monarch</router-link></li>
-                <li><router-link to="/about/sources">Data Sources</router-link></li>
-                <li><router-link to="/page/releases">Releases</router-link></li>
-                <li><router-link to="/page/team">Monarch Team</router-link></li>
-                <li><router-link to="/page/disclaimer">Monarch Disclaimer</router-link></li>
-                <li role="separator" class="divider"></li>
-                <li><router-link to="/page/services">Monarch Web Services and APIs</router-link></li>
-                <li><a target="_blank" href="https://archive.monarchinitiative.org/latest ">Data Downloads</a></li>
             </ul>
         </li>
         <li class="dropdown">
@@ -97,18 +101,28 @@
             </ul>
         </li>
 
+        <li
+          v-if="$route.path === '/'">
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </li>
+
         <form
           v-if="$route.path !== '/'"
           v-on:submit="searchSubmit"
           id="search_form"
           class="navbar-right navbar-form navbar_searchspace"
           action="/search" role="search">
-          <div class="form-group">
+          <div class="form-group input-group">
+            <span class="input-group-addon" id="sizing-addon1">
+            <i class="fa fa-search fa-fw"></i>
+            </span>
             <input id="search" type="text" class="form-control" placeholder="Search (e.g. Parkinson's)"/>
-            <button id="navbar-search-btn" class="btn btn-primary"
+
+<!--             <button id="navbar-search-btn" class="btn btn-primary"
                 type="submit">
                 Go
             </button>
+ -->
           </div>
         </form>
       </ul>
@@ -157,10 +171,10 @@ nav#monarch-navbar.navbar.navbar-default.navbar-pf .navbar-toggle .icon-bar {
 }
 
 .branding-logo {
-  height: 24px;
+  height: 22px;
   width: auto;
-  margin: 1px 0 0 10px;
-  float: left;
+  margin: 0 0 0 10px;
+  xfloat: left;
 }
 
 .branding-name {
