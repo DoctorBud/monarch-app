@@ -11,6 +11,57 @@
 import Vue from 'vue';
 import axios from 'axios';
 
+const validCats = {
+  'gene': 'gene',
+  'phenotype': 'phenotype',
+  'genotype': 'genotype',
+  'disease': 'disease',
+  'variant locus': 'variant',
+};
+
+function getOrderedCats(catList) {
+  const categoryObj = catList.reduce( (map, cat) => {
+    const mappedCat = validCats[cat];
+    if (mappedCat) {
+      map.valid[mappedCat] = mappedCat;
+    }
+    else {
+      map.other[cat] = cat;
+    }
+    return map;
+  },
+  {
+    valid: {},
+    other: {}
+  });
+
+  const result = [].concat(Object.keys(categoryObj.valid), ['/'], Object.keys(categoryObj.other));
+
+  return result;
+}
+
+function getOrderedCatsOld(catList) {
+  const categoryObj = catList.reduce( (map, cat) => {
+    const mappedCat = validCats[cat];
+    if (mappedCat) {
+      map.valid[mappedCat] = mappedCat;
+    }
+    else {
+      map.other[cat] = cat;
+    }
+    return map;
+  },
+  {
+    valid: {},
+    other: {}
+  });
+
+  const result = [].concat(Object.keys(categoryObj.valid), Object.keys(categoryObj.other));
+  console.log('goc', catList, categoryObj, result);
+
+  return result;
+}
+
 function InitSearchResults() {
     const vueapp = new Vue({
       delimiters: ['{[{', '}]}'], // ugly, but otherwise it'll clash with puptent template mechanism
@@ -28,6 +79,32 @@ function InitSearchResults() {
         searching: true
       },
       methods: {
+        sanitizeHighlighting(htmlHighlightedText) {
+          // NYI: We should properly make sure that the highlighting conforms to our
+          // expectations, and does not contain script tags or other nasties.
+          return htmlHighlightedText;
+        },
+        sanitize(rawResults) {
+          return rawResults.map(result => {
+            const orderedCats = result.category_std ? getOrderedCats(result.category_std) : ['???'];
+            const category = orderedCats[0];
+            const categoryLower = category.toLowerCase();
+            const categoryCommas = orderedCats.join(',');
+            const taxonLabel = typeof result.taxon_label === 'object' ?
+              result.taxon_label.join(',') :
+              result.taxon_label;
+            const htmlHighlight = this.highlight[result.id];
+
+            result.linkName = this.sanitizeHighlighting(result.label[0]);
+            result.linkURL = '/' + category + '/' + result.id;
+            result.category = categoryLower;
+            result.categoryCommas = categoryCommas;
+            result.taxonLabel = taxonLabel;
+            result.htmlHighlight = htmlHighlight;
+
+            return result;
+          });
+        },
         fetchResults: function() {
           // console.log("=== FETCH " + this.page + " " + JSON.stringify(this.user_facets));
           const anchor = this;
@@ -38,11 +115,10 @@ function InitSearchResults() {
               params: this.user_facets
             })
             .then(function (response) {
-              console.log('response', response);
+              // console.log('response', response);
               anchor.searching = false;
               anchor.numFound = response.data.response.numFound;
               anchor.numRowsDisplayed = response.data.response.docs.length;
-              anchor.results = response.data.response.docs;
               anchor.highlight = {};
               anchor.selenium_id = 'loaded';
               if (anchor.numFound === 0) {
@@ -53,6 +129,9 @@ function InitSearchResults() {
                 var firstKey = Object.keys(response.data.highlighting[key])[0];
                 anchor.highlight[key] = response.data.highlighting[key][firstKey][0];
               });
+
+              anchor.results = anchor.sanitize(response.data.response.docs);
+
               var facets_fields = response.data.facet_counts.facet_fields;
               if(anchor.facets.length == 0) { // for initial visit of the search page
                 Object.keys(facets_fields).forEach(function(key) {
