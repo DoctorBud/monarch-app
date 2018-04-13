@@ -33,10 +33,15 @@
                   <thead><tr><th width="25%">Term</th><th width="15%">Category</th><th width="25%">Taxon</th><th>Matching String</th></tr></thead>
                   <tbody>
                     <tr class="search-result-item" v-for="(result, index) in results">
-                      <td>
-                      <a data-monarch-legacy
-                        v-bind:href="result.linkURL"
-                        v-html="result.linkName"></a>
+                      <td
+                        v-if="result.linkURL">
+                        <a data-monarch-legacy
+                          v-bind:href="result.linkURL"
+                          v-html="result.linkName"></a>
+                      </td>
+                      <td
+                        v-else
+                        v-html="result.linkName">
                       </td>
                       <td>{[{result.categoryCommas}]}</td>
                       <td>{[{result.taxonLabel}]}</td>
