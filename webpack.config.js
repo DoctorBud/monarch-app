@@ -457,6 +457,11 @@ if (MODE_DEV_SERVER) {
     config.devServer.proxy['/legacy'] = {
       target: 'http://localhost:8080',
     };
+
+    config.devServer.proxy['/node'] = {
+      target: 'http://localhost:8080',
+    };
+
     config.devServer.proxy['/'] = {
       target: 'http://localhost:8080',
       bypass: function(req, res, proxyOptions) {

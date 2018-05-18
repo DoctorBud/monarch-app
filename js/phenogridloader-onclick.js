@@ -32,12 +32,14 @@ function loadPhenogrid(phenogrid_conf, view) {
             throw new Error("No configuration defined for gridSkeletonData");
         }
 
+        console.log('phenogrid', disease_id);
         jQuery.ajax({
             url : '/' + disease_id + '/phenotype_list.json',
             async : true,
             dataType : 'json',
             //timeout : 180000,
             error : function(jqXHR, textStatus, errorThrown) {
+                console.log('phenogrid error', disease_id, textStatus);
                 jQuery('#' + spinner_div.get_id()).remove();
                 var phenogridOpts = {
                                         gridSkeletonData: gridSkeletonData,
@@ -46,6 +48,7 @@ function loadPhenogrid(phenogrid_conf, view) {
                 Phenogrid.createPhenogridForElement(phenogridContainer, phenogridOpts);
             },
             success : function(data) {
+                console.log('phenogrid success', disease_id, data);
                 jQuery('#' + spinner_div.get_id()).remove();
                 gridSkeletonData.yAxis = data.phenotype_list;
 
