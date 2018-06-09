@@ -59,6 +59,23 @@ if (/^\w+/.test(DIST_DIR) === false || /\/$/.test(DIST_DIR) === true) { // @todo
 }
 
 log.info('webpack', `${NODE_ENV.toUpperCase()} mode`);
+if (NODE_ENV === 'development') {
+  plugins.push(
+    new webpack.DefinePlugin({
+      'global.serviceUrls': require('./config/dev.env')
+    })
+  );
+  log.info('webpack', 'config/dev.env.js loaded');
+}
+
+if (NODE_ENV === 'production') {
+  plugins.push(
+    new webpack.DefinePlugin({
+      'global.serviceUrls': require('./config/prod.env')
+    })
+  );
+  log.info('webpack', 'config/prod.env.js loaded');
+}
 if (USE_SPA) {
   log.info('webpack', 'USE_SPA active');
 }
@@ -214,7 +231,7 @@ const config = {
   devtool: OPTIMIZE ? false : 'sourcemap',
   module: {
     noParse: [
-      path.resolve(__dirname, 'gen/bbop.min.js'),
+      // path.resolve(__dirname, 'gen/bbop.min.js'),
       path.resolve(__dirname, 'node_modules/bootstrap/dist/js/bootstrap.min.js'),
       path.resolve(__dirname, 'node_modules/underscore/underscore-min.js'),
       path.resolve(__dirname, 'node_modules/d3/d3.min.js'),
@@ -342,7 +359,8 @@ const config = {
   resolve: {
     modules: ['node_modules'],
     alias: {
-      'bbop': path.join(__dirname, 'gen/bbop.min.js'),
+      // 'bbop': path.join(__dirname, 'gen/bbop.min.js'),
+      'bbop': path.join(__dirname, 'node_modules/bbop/bbop.js'),
       'jquery': path.join(__dirname, 'node_modules/jquery/dist/jquery.min.js'),
       'jquery-ui': path.join(__dirname, 'node_modules/jquery-ui/'),
       'd3': path.join(__dirname, 'node_modules/d3/d3.min.js'),
@@ -457,6 +475,11 @@ if (MODE_DEV_SERVER) {
     config.devServer.proxy['/legacy'] = {
       target: 'http://localhost:8080',
     };
+
+    config.devServer.proxy['/node'] = {
+      target: 'http://localhost:8080',
+    };
+
     config.devServer.proxy['/'] = {
       target: 'http://localhost:8080',
       bypass: function(req, res, proxyOptions) {
