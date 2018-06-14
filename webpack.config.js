@@ -214,7 +214,7 @@ const config = {
   devtool: OPTIMIZE ? false : 'sourcemap',
   module: {
     noParse: [
-      path.resolve(__dirname, 'gen/bbop.min.js'),
+      // path.resolve(__dirname, 'gen/bbop.min.js'),
       path.resolve(__dirname, 'node_modules/bootstrap/dist/js/bootstrap.min.js'),
       path.resolve(__dirname, 'node_modules/underscore/underscore-min.js'),
       path.resolve(__dirname, 'node_modules/d3/d3.min.js'),
@@ -342,7 +342,8 @@ const config = {
   resolve: {
     modules: ['node_modules'],
     alias: {
-      'bbop': path.join(__dirname, 'gen/bbop.min.js'),
+      // 'bbop': path.join(__dirname, 'gen/bbop.min.js'),
+      'bbop': path.join(__dirname, 'node_modules/bbop/bbop.js'),
       'jquery': path.join(__dirname, 'node_modules/jquery/dist/jquery.min.js'),
       'jquery-ui': path.join(__dirname, 'node_modules/jquery-ui/'),
       'd3': path.join(__dirname, 'node_modules/d3/d3.min.js'),
