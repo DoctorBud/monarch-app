@@ -52,11 +52,13 @@
           <router-link class="dropdown-item" to="/page/services">Monarch Web Services and APIs</router-link>
           <a target="_blank" class="dropdown-item" href="https://archive.monarchinitiative.org/latest ">Data Downloads</a>
 
+          <div class="dropdown-divider"></div>
+
           <router-link class="dropdown-item" to="/disease/MONDO:0007947">
             Marfan syndrome MONDO:0007947
           </router-link>
-          <router-link class="dropdown-item" to="/disease/OMIA:000628-9913">
-            Marfan syndrome OMIA:000628-9913
+          <router-link class="dropdown-item" to="/gene/HGNC:17397">
+            BANF1 HGNC:17397
           </router-link>
           <router-link class="dropdown-item" to="/gene/MGI:3A98365">
             Sox3 (Mus musculus) MGI:3A98365
@@ -64,8 +66,6 @@
           <router-link class="dropdown-item" to="/gene/ZFIN:ZDB-GENE-980526-333">
             sox3 (Danio rerio) ZFIN:ZDB-GENE-980526-333
           </router-link>
-
-          <router-link class="dropdown-item" to="/page/aboutSPA">About Monarch (SPA)</router-link>
         </div>
       </li>
 
