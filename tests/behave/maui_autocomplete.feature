@@ -16,13 +16,13 @@ Scenario: "food" in the navbar search with submit goes to a search page
     and the document should contain "botulism"
 
 @ui
-Scenario: "food" in the navbar search with a click goes to a details page
+Scenario: "latex all" in the navbar search with a click goes to a details page
    Given I go to page "/"
-    and I type "food all" into the navbar search
-    and I wait until "food hypersensitivity" appears in the autocomplete
-    and I click the autocomplete item "food hypersensitivity"
+    and I type "latex all" into the navbar search
+    and I wait until "Allergic reaction to products containing processed natural rubber latex" appears in the autocomplete
+    and I click the autocomplete item "Allergic reaction to products containing processed natural rubber latex"
     when I wait for id "overview-panel"
-    then the title should be "Monarch Disease: food allergy (MONDO:0002497)"
+    then the title should be "Monarch Disease: latex allergy (MONDO:0000807)"
 
 @ui
 Scenario: "BRCA1" in the navbar search with a click goes to a gene page

@@ -82,24 +82,31 @@ function navbar_search_init(in_search_id, in_form_id){
             },
         select: function(event,ui) {
         if (ui.item !== null) {
-            // Violating DRY and copying from the new Vue autocomplete
-            const validCats = {
-               'gene': 'gene',
-               'variant locus': 'variant',
-               'phenotype': 'phenotype',
-               'genotype': 'genotype',
-               'disease': 'disease'
-            };
-            const categoryObj = ui.item.category.reduce((map, cat) => {
-                cat = validCats[cat];
-                if (cat) {
-                  map[cat] = cat;
-                }
-                return map;
-            }, {});
-            const category = categoryObj.gene ||
-              categoryObj.variant ||
-              Object.keys(categoryObj).join(',');
+            let category;
+            if (ui.item.category) {
+                // Violating DRY and copying from the new Vue autocomplete
+                const validCats = {
+                   'gene': 'gene',
+                   'variant locus': 'variant',
+                   'phenotype': 'phenotype',
+                   'genotype': 'genotype',
+                   'disease': 'disease'
+                };
+                const categoryObj = ui.item.category.reduce((map, cat) => {
+                    cat = validCats[cat];
+                    if (cat) {
+                      map[cat] = cat;
+                    }
+                    return map;
+                }, {});
+                category = categoryObj.gene ||
+                  categoryObj.variant ||
+                  Object.keys(categoryObj).join(',');
+            }
+            else {
+                console.log('No category found... using gene', JSON.stringify(ui.item, null, 2));
+                category = 'gene';
+            }
             const newurl = "/"+category+"/"
                 +encodeURIComponent(ui.item.id);
             if (window.vueRouter) {
